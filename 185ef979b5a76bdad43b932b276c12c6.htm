@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <![endif]-->
+    <meta charset="UTF-8">
+    <title>Batronix</title>
+    <style type="text/css">
+/* CSS reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+  border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline; margin:0; padding:0;
+}
+:focus { outline:0; }
+ol,ul { list-style:none; }
+
+body {
+  background:transparent;
+  color:#444444;
+  font-family:'Helvetica Neue', Arial, sans-serif;
+  font-size:11px;
+  line-height:16px;
+}
+
+
+p:first-letter, h3:first-letter { text-transform: capitalize; }
+
+p.r-l,p.r-s, a#footer span.logo { background:url(//s.trustpilot.com/images/tpelements/trustpilotbox/sprite.png) no-repeat; }
+p.r-l { display:inline-block; width:113px; height:21px; }
+p.r-s { display:inline-block; width:64px; height:12px; float:left; }
+p.l-s0 { background-position:-2px -2px; }
+p.l-s1 { background-position:-2px -27px; }
+p.l-s2 { background-position:-2px -52px; }
+p.l-s3 { background-position:-2px -77px; }
+p.l-s4 { background-position:-2px -102px; }
+p.l-s5 { background-position:-2px -127px; }
+p.s-s0 { background-position:-2px -151px; }
+p.s-s1 { background-position:-2px -166px; }
+p.s-s2 { background-position:-2px -181px; }
+p.s-s3 { background-position:-2px -196px; }
+p.s-s4 { background-position:-2px -211px; }
+p.s-s5 { background-position:-2px -226px; }
+
+.tp-box {
+  background:#FFFFFF;
+  border:1px solid #DBDBDB;
+  -webkit-border-top-left-radius: 4px;
+      -moz-border-radius-topleft: 4px; 
+           border-radius-top-left: 4px;
+  -webkit-border-top-right-radius: 4px;
+      -moz-border-radius-topright: 4px;
+           border-radius-top-right: 4px;           
+  -webkit-border-bottom-right-radius: 4px;
+      -moz-border-radius-bottomright: 4px;
+           border-radius-bottom-right: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+      -moz-border-radius-bottomleft: 4px;
+           border-radius-bottom-left: 4px;
+  display:block;
+  float:left;
+  position:relative;
+  width:238px;
+  overflow: hidden;
+}
+  .tp-box:hover{
+    cursor:pointer;
+  }
+
+header {
+  -webkit-border-top-left-radius: 4px; 
+      -moz-border-radius-topleft: 4px; 
+           border-radius-top-left: 4px;
+  -webkit-border-top-right-radius: 4px; 
+      -moz-border-radius-topright: 4px; 
+           border-radius-top-right: 4px;
+  text-align:center;
+  padding:6px 10px 12px;
+  display:block;
+}
+
+header h1 { 
+  text-align:center;
+  font:bold 2.182em/1.255em sans-serif;
+  margin:0;
+}
+
+header div.stars{
+  margin:5px 0 0; 
+  text-align:center;
+}
+
+header p.review-count { 
+  margin:5px 0 0; 
+  text-align:center;
+}
+
+h2#header-reviews {
+  background:#32312E;
+  font-size:1.273em;
+  font-weight:700;
+  color:#F6A800;
+  padding:5px 10px;
+  
+  -webkit-border-top-left-radius: 4px; 
+      -moz-border-radius-topleft: 4px; 
+           border-radius-top-left: 4px;
+  -webkit-border-top-right-radius: 4px; 
+      -moz-border-radius-topright: 4px; 
+           border-radius-top-right: 4px;
+  
+}
+
+
+section.reviews {
+  height:none;
+  display:block;
+  overflow-y:auto;
+  margin:0 ;
+  padding:10px 10px 0;
+}
+
+
+section.reviews article {
+  display:block;
+  border-bottom:1px solid #32312E;
+  margin:0 0 12px;
+  padding:0 0 12px;
+  float:left;
+  width:100%;
+  *width:auto;
+}
+
+section.reviews article a {
+  color:#CE5600;
+}
+
+section.reviews article.last-child {
+  border-bottom: none;
+}
+
+time {
+  display:inline-block;
+  float:right;
+  -moz-opacity:0.6;
+  opacity:0.6;
+  margin-top:-2px;
+}
+
+h3 {
+  clear:both;
+  color:#F6A800;
+  font-size:1.091em;
+  font-weight:700;
+  padding:6px 0 0;
+  *padding:0;
+}
+
+p.desc {
+  padding:0 0 8px;
+}
+
+img.user-img {
+  float:left;
+  padding:0 6px 0 0;
+}
+
+p.author {
+  font-style:italic;
+}
+
+a#footer {
+  background:#32312E;
+  display:block;
+  -webkit-border-bottom-right-radius: 4px;
+      -moz-border-radius-bottomright: 4px;
+           border-radius-bottom-right: 4px;
+
+  -webkit-border-bottom-left-radius: 4px;
+      -moz-border-radius-bottomleft: 4px;
+           border-radius-bottom-left: 4px;
+  font-size:11px;
+  font-weight:700;
+  width:100%;
+  padding:0 0 4px;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+
+a#footer span {
+  display:inline-block;
+  margin:5px 0 0;
+  font-size:11px;
+  line-height:12px;
+}
+
+a#footer span.trust, a#footer span.pilot{
+  position:relative;top:-1px;
+  *top:2px;
+  _top:-1px;
+}
+
+a#footer span.trust {
+  color:#fff;
+  margin:0 0 0 4px;
+}
+
+a#footer span.pilot {
+  color:#999;
+}
+
+a#footer span.logo {
+  background-position: -2px -265px;
+  height:12px; width:12px;
+  margin:6px 0 0 10px;
+}
+
+div.clear {
+  clear:both;
+  font-size:1px;
+  height:0;
+}
+</style>
+
+    <!--[if lt IE 9]>
+      <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body class="">
+    <div class="tp-box" id="tp-iframe-widget">
+        <h2 id="header-reviews">Neue Bewertungen</h2>
+            <section class="reviews">
+                    <article>
+                        <p class="r-s s-s5">
+                        </p>
+                            <time datetime="2014-06-13T14:32:06">13 Jun</time>
+                        <h3>excellent</h3>
+                        <p class="desc">very well done, good aesthetics and product quality. 
+Sofwaere is automated and fluid. <a href="https://www.trustpilot.de/review/www.batronix.com/539b0b66000064000290a9cd" target="_blank">Mehr</a></p>
+                        <p class="author">
+Artem Ryabikov                        </p>
+                        <div class="clear">&nbsp;</div>
+                    </article>
+                    <article class="last-child">
+                        <p class="r-s s-s5">
+                        </p>
+                            <time datetime="2014-06-13T09:26:58">13 Jun</time>
+                        <h3>Asked for an oscilloscope, got an oscilloscope.... Success!</h3>
+                        <p class="desc">Bought a Rigol DS1052E with the best price I could find in Europe.
+Arrived with no problems. <a href="https://www.trustpilot.de/review/www.batronix.com/539ac3e20000640002909838" target="_blank">Mehr</a></p>
+                        <p class="author">
+Nuno Cardoso                        </p>
+                        <div class="clear">&nbsp;</div>
+                    </article>
+            </section>
+        <a id="footer" href="https://www.trustpilot.de/review/www.batronix.com?utm_source=www.batronix.com&amp;utm_medium=box2&amp;utm_campaign=plugins" target="_blank">
+            <span class="logo"></span><span class="trust">Trust</span><span class="pilot">pilot</span>
+        </a>
+    </div>
+    
+<script type="text/javascript">
+var popup = {
+
+    settings: {
+        height: 700,
+        width: 600
+    },
+
+    open: function(windowUri) {
+        var windowWidth = popup.settings.width,
+                    windowHeight = popup.settings.height,
+                    centerWidth = (window.screen.width - windowWidth) / 2,
+                    centerHeight = (window.screen.height - windowHeight) / 2;
+
+        var newWindow = window.open(windowUri, '_blank', 'location=0' +
+                                                       ',toolbar=0' +
+                                                       ',width=' + windowWidth +
+                                                       ',height=' + windowHeight +
+                                                       ',top=' + centerHeight +
+                                                       ',left=' + centerWidth +
+                                                       ',scrollbars=yes',
+                                                       true);
+    }
+
+};
+
+function getDocHeight() {
+    var D = document;
+    return Math.max(
+        Math.max(D.body.scrollHeight, D.documentElement.scrollHeight),
+        Math.max(D.body.offsetHeight, D.documentElement.offsetHeight),
+        Math.max(D.body.clientHeight, D.documentElement.clientHeight)
+    );
+}
+
+function getElementHeight(elem) {
+    var tgt = document.getElementById( elem );
+
+    if(tgt) {
+        return tgt.offsetHeight;
+    } else {
+        return 0;
+    }
+}
+
+window.onload = function() {
+	var doc = document.location.href;
+	var type = /type=([a-z]+)/i .exec(doc)[1];
+	var index = parseInt( /index=(\d+)/i .exec(doc)[1]);
+
+	var ele = document.getElementsByTagName('body')[0];
+	ele.onclick = function(event) {
+        evt = event || window.event;
+
+		// Disables click if target of click is/inside an anchor tag
+        var target = evt.target || evt.srcElement;
+
+		if (target.tagName == 'A' || target.parentNode.tagName == 'A') return;
+
+		var usePopup = true;
+		if (usePopup) {
+			popup.open('/tpelements/985470/p_de-DE_False_stars_11111.html', 'Trustpilot Bewertungen über Batronix');
+		}
+		else {
+			window.open('https://www.trustpilot.de/review/www.batronix.com?utm_source=www.batronix.com&amp;utm_medium=box2&amp;utm_campaign=plugins');
+		}
+	};
+
+
+    var the_height = 298,
+        header = getElementHeight('header') + getElementHeight('header-reviews'),
+        footer = getElementHeight('footer');
+
+    var reviews_height = the_height - (header + footer) - 10;
+
+    if (document.getElementsByTagName('section')[0]) {
+        
+    }
+
+	if (typeof window.postMessage == 'function') {
+		window.parent.postMessage(
+			type + ':' + index + ':' + getDocHeight(), // message
+			'*' // target origin
+        );
+	} else {
+        if( document.getElementsByTagName('section')[0] ) {
+            if(reviews_height > 0) {
+                document.getElementsByTagName('section')[0].style.height = reviews_height + 'px';
+            }
+        }
+	}
+};
+</script>
+
+
+</body></html>
