@@ -1,0 +1,918 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <meta http-equiv="expires" content="86400">
+  <meta name="Author" content="Batronix Elektronik">
+  <link rel="shortcut icon" type="image/x-icon" href="http://www.batronix.com/favicon.ico">
+
+  <title>Basic information about memory chips and programming</title>
+  <meta name="Description" content="We receive frequent inquiries on memory chips and are repeatedly forced to note that there is still a very high requirement for information in this area. For this reason, we are now making the basic information for programming memory chips, such as eproms/eeproms and Flash chips, public here. In particular, we will discuss the various types of memory chips and compare what the 27C, 28C or 29F series, for instance, can and cannot do.">
+  <meta name="Keywords" content="eproms, eeproms, flash, chip, 27c, 28c, 29f, eprom, eeprom, programming, information, erase, uv, eraser">
+
+  <link href="Basic%20information%20about%20memory%20chips%20and%20programming_files/cssen.css" rel="stylesheet" type="text/css">
+
+  <script src="Basic%20information%20about%20memory%20chips%20and%20programming_files/ga.js" async="" type="text/javascript"></script><script src="Basic%20information%20about%20memory%20chips%20and%20programming_files/tp_elements_all.js" async="" type="text/javascript"></script><script type="text/javascript" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/js.php"></script>
+
+  <!--AM2HeaderStart-->
+  
+  <!--AM2HeaderEnd-->
+
+<style type="text/css" id="mz-css"></style></head>
+<body>
+  <!--AM2BodyStart--><!--AM2BodyEnd--><!-- #BeginLibraryItem "/Library/header-en.lbi" --><!-- Header-Start -->
+
+<div id="header_container">
+  <div id="header_content"> 
+
+    <!-- Firmenlogo --> 
+
+    <a href="http://www.batronix.com/" title="Batronix Elektronik"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/batronix.png" alt="Batronix" title="Batronix Elektronik" id="header_logo"></a> 
+
+    <!-- Slogan --> 
+
+    <img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/slogan_en.png" alt="LEADING PROGRAMMING AND MEASUREMENT SOLUTIONS" title="" id="header_slogan"> 
+
+    <!-- Sprachauswahl -->
+
+    <div id="header_languages"> <a href="http://www.batronix.com/shop/index.html"><img alt="English" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/en_small.png" class="header_langimg">English</a><br>
+      <a href="http://www.batronix.com/versand/index.html"><img alt="German" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/de_small.png" class="header_langimg">German</a> </div>
+
+    <!-- Trusted Shops Siegel --> 
+
+    <a href="https://www.trustedshops.de/tshops/siegel.php3?shop_id=X850122E19009E2AC1D8FB90E110CC905" title="Trusted Shops Garantie"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/trustedshops.png" alt="Trusted Shops Garantie" id="header_trustedshops"></a> 
+
+    <!-- Hauptmenue-Start -->
+
+    <div id="menu_container">
+      <div class="menuButton"> <a id="menuItem1" class="menuItem" href="http://www.batronix.com/menu/programming_technologies.html"> <span class="menuTabLeft"></span><span class="menuTabMiddle">Programming Devices</span><span class="menuTabRight"></span> </a>
+        <div id="menutab1en" class="menuContent menuTab">              <!-- Inhalt Programmiertechnik -->
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/programmer/index.html">
+                  <img alt="Programmers" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/BX-Programmer-180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Programmers</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/programmer/index.html">Overview</a></li>
+             		  <li><a href="http://www.batronix.com/php/index.php?cmd=prodsearch&amp;cat=1&amp;loc=en">Product Assistant</a></li>
+             		  <li><a href="http://www.batronix.com/shop/programmer/programmers.html">All Programmers</a></li>
+		              <li><a href="http://www.batronix.com/shop/programmer/eprom-programmer.html">Low-cost</a></li>
+	   		          <li><a href="http://www.batronix.com/shop/programmer/handy-programmers.html">Repair and Maintainance</a></li>
+	           		  <li><a href="http://www.batronix.com/shop/programmer/chip-tuning-programmers.html">Chip Tuning</a></li>
+			          <li><a href="http://www.batronix.com/shop/programmer/universal-programmer.html">Development</a></li>
+		              <li><a href="http://www.batronix.com/shop/programmer/microcontroller-programmer.html">Microcontroller</a></li>
+			          <li><a href="http://www.batronix.com/shop/programmer/production-programmer.html">Volume Production</a></li>
+			          <li><a href="http://www.batronix.com/shop/programmer/volume-production-programmers.html">Cluster</a></li>
+		              <li><a href="http://www.batronix.com/shop/programmer/gang-programmer.html">Gang</a></li>
+		              <li><a href="http://www.batronix.com/shop/programmer/obsolete-programmers.html">Obsolete Devices</a></li>
+            		</ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/adapter/index.html">
+                  <img alt="Adapter" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/adapter_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Adapter</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/adapter/index.html">Overview</a></li>
+                	  <li><a href="http://www.batronix.com/shop/adapter/plcc-adapter.html">PLCC</a></li>
+			          <li><a href="http://www.batronix.com/shop/adapter/sop-adapter.html">SOP, SOIC and PSOP</a></li>
+			          <li><a href="http://www.batronix.com/shop/adapter/tsop-adapter.html">TSOP and SSOP</a></li>
+			          <li><a href="http://www.batronix.com/shop/adapter/qfp-adapter.html">QFP, PQFP and TQFP</a></li>
+			          <li><a href="http://www.batronix.com/shop/adapter/bga-adapter.html">BGA</a></li>                      
+			          <li><a href="http://www.batronix.com/shop/adapter/wson-adapter.html">QFN, SON and SAP</a></li>
+			          <li><a href="http://www.batronix.com/shop/adapter/isp-adapter.html">ISP</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/chips/index.html">
+                  <img alt="Components / Chips" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/Eproms-120_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Components / Chips</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/chips/index.html">Overview</a></li>
+                	  <li><a href="http://www.batronix.com/shop/chips/eproms.html">Eproms and EEproms</a></li>
+                	  <li><a href="http://www.batronix.com/shop/chips/flash-eproms.html">Flash Eproms</a></li>
+                	  <li><a href="http://www.batronix.com/shop/chips/serial-eeproms.html">Serial EEproms</a></li>
+                	  <li><a href="http://www.batronix.com/shop/chips/microcontroller.html">Microcontroller</a></li>
+                	  <li><a href="http://www.batronix.com/shop/sockets/index.html">Lever Sockets</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/devices/uv-eraser.html">
+                  <img alt="Eprom Erasers" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/EpromEraserLER121A-180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Eprom Erasers</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/devices/uv-eraser.html">Eprom Erasers</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/epromemulator/index.html">
+                  <img alt="Eprom Emulators" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/EpromEmulator_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Eprom Emulators</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/epromemulator/index.html">Eprom Emulators</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/accessory/programmer.html">
+                  <img alt="Accessories" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/PLCCExtractor-180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Accessories</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/accessory/programmer.html">Accessories</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <!-- Programmiertechnik Ende --></div>
+      </div>
+      <div class="menuButton"> <a id="menuItem2" class="menuItem" href="http://www.batronix.com/menu/measurement_technologies.html"> <span class="menuTabLeft"></span><span class="menuTabMiddle">Measurement Instruments</span><span class="menuTabRight"></span> </a>
+        <div id="menutab2en" class="menuContent menuTab">              <!-- Inhalt Messtechnik -->
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/oscilloscopes/index.html">
+                  <img alt="Oscilloscopes" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/Rigol_Scope_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Oscilloscopes</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/oscilloscopes/index.html">Overview</a></li>
+			          <li><a href="http://www.batronix.com/shop/rigol/Oscilloscopes.html">Model Overview</a></li>
+				      <li><a href="http://batronix.com/shop/rigol/DS1000.html">Rigol DS1000D/E</a></li>
+                      <li><a href="http://batronix.com/shop/rigol/DS1000B.html">Rigol DS1000B</a></li>
+                      <li><a href="http://batronix.com/shop/rigol/DS1000Z.html">Rigol DS1000Z</a></li>
+                      <li><a href="http://batronix.com/shop/rigol/DS2000A.html">Rigol DS2000A</a></li>
+                      <li><a href="http://batronix.com/shop/rigol/DS4000.html">Rigol DS4000</a></li>
+                      <li><a href="http://batronix.com/shop/rigol/MSO4000.html">Rigol MSO4000</a></li>
+                      <li><a href="http://batronix.com/shop/rigol/DS6000.html">Rigol DS6000</a></li>                      
+				      <li><a href="http://batronix.com/shop/oscilloscopes/Owon-SDS-MSO.html">Owon SDS / MSO</a></li>
+			    	  <li><a href="http://batronix.com/shop/oscilloscopes/Owon-HDS.html">Owon HDS</a></li>
+<li><a href="http://batronix.com/shop/oscilloscopes/PC-Oscilloscopes.html">PC Oscilloscopes</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/logic-analyzer/index.html">
+                  <img alt="Logic Analyzers" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/logicanalyzer_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Logic Analyzers</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/logic-analyzer/index.html">Logic Analyzers</a></li>
+			          <li><a href="http://www.progshop.com/php/index.php?cmd=prodsearch&amp;cat=4&amp;loc=en">Product Assistant</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/waveform-generator/index.html">
+                  <img alt="Waveform-Generators" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/funktionsgenerator_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Waveform-Generators</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/waveform-generator/index.html">Waveform-Generators</a></li>
+			          <li><a href="http://www.progshop.com/php/index.php?cmd=prodsearch&amp;cat=5&amp;loc=en">Product Assistant</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/multimeter/index.html">
+                  <img alt="Digital Multimeters" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/multimeter_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Digital Multimeters</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/multimeter/index.html">Overview</a></li>
+			          <li><a href="http://www.batronix.com/php/index.php?cmd=prodsearch&amp;cat=2&amp;loc=en">Product Assistant</a></li>
+                	  <li><a href="http://www.batronix.com/shop/multimeter/multimeter.html">Digital Multimeters</a></li>
+			          <li><a href="http://www.batronix.com/shop/multimeter/digital-multimeter.html">Handheld Multimeter</a></li>
+			          <li><a href="http://www.batronix.com/shop/multimeter/desktop-multimeter.html">Desktop Multimeter</a></li>
+		              <li><a href="http://www.batronix.com/shop/multimeter/clamp-multimeter.html">Clamp Multimeter</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/UT300B-oblique-s.png" alt="Thermometer"></div>
+                  <div class="menuCatLinks">
+                    <h1>Thermometer</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/thermometer/thermometer.html">Infrared Thermometer</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+		      </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/spectrum-analyzer/index.html">
+                  <img alt="Spectrum Analysers" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/spektrum-analyzer_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Spectrum Analysers</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/spectrum-analyzer/index.html">Spectrum Analysers</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/power-supplies/power-supplies.html">
+                  <img alt="Laboratory Power Supplies" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/powersupply_180_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Laboratory Power Supplies</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/power-supplies/power-supplies.html">Laboratory Power Supplies</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/accessory/test-equipment.html">
+                  <img alt="Accessories" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/accessory_120_menu.jpg">
+                  </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Accessories</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/accessory/test-equipment.html">Accessories</a></li>
+                	  <li><a href="http://www.batronix.com/shop/accessory/probes.html">Measurement Probes</a></li>
+                	  <li><a href="http://www.batronix.com/shop/accessory/emc.html">EMC Probes and Accessory</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <!-- Messtechnik Ende --></div>
+      </div>
+      <div class="menuButton"> <a id="menuItem6" class="menuItem" href="http://www.batronix.com/shop/soldering/index.html"> <span class="menuTabLeft"></span><span class="menuTabMiddle">Soldering Tools</span><span class="menuTabRight"></span></a>
+        <div id="menutab5en" class="menuContent menuTab">              <!-- Inhalt Löttechnik -->
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg">
+                    <a href="http://www.batronix.com/shop/soldering/soldering_stations.html">
+                      <img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/solder_stations_menu.png" alt="Soldering Stations" class="floatleft">
+                    </a>
+                  </div>
+                  <div class="menuCatLinks">
+                    <h1>Soldering Stations</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/soldering/soldering_stations.html">Overview</a></li>
+             		  <li><a href="http://www.batronix.com/shop/soldering/Atten-AT937b.html">Atten AT937b</a></li>
+             		  <li><a href="http://www.batronix.com/shop/soldering/Atten-AT938D.html">Atten AT938D</a></li>
+		              <li><a href="http://www.batronix.com/shop/soldering/Atten-AT980D.html">Atten AT980D</a></li>
+	   		          <li><a href="http://www.batronix.com/shop/soldering/Atten-AT8502D.html">Atten AT8502D</a></li>
+            		</ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg"><a href="http://www.batronix.com/shop/soldering/tips.html">
+                      <img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/tips.png" alt="Soldering Tips">
+                    </a></div>
+                  <div class="menuCatLinks">
+                    <h1>Soldering Tips</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/soldering/tips.html">Soldering Tips</a></li>
+            		</ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg">
+                    <a href="http://www.batronix.com/shop/soldering/rework_stations.html">
+                      <img alt="Rework Stations" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/rework_stations_menu.png">
+                    </a>
+                  </div>
+                  <div class="menuCatLinks">
+                    <h1>Rework Stations</h1>
+                    <ul>
+             		  <li><a href="http://www.batronix.com/shop/soldering/rework_stations.html">Overview</a></li>
+                	  <li><a href="http://www.batronix.com/shop/soldering/Atten-AT8502D.html">Atten AT8502D</a></li>
+			          <li><a href="http://www.batronix.com/shop/soldering/Atten-AT852D.html">Atten AT852D</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg">
+                    <a href="http://www.batronix.com/shop/soldering/nozzles.html">
+                      <img alt="Hot-Air Nozzles" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/nozzles.png">
+                    </a>
+                  </div>
+                  <div class="menuCatLinks">
+                    <h1>Hot-Air Nozzles</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/soldering/nozzles.html">Hot-Air Nozzles</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatImg">
+                    <a href="http://www.batronix.com/shop/soldering/ovens.html">
+                      <img alt="Reflow / Soldering Ovens" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/ovens.png">
+                    </a>
+                  </div>
+                  <div class="menuCatLinks">
+                    <h1>Reflow / Soldering Ovens</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/soldering/ovens.html">Overview</a></li>
+                	  <li><a href="http://www.batronix.com/shop/soldering/Atten-AT-R1825.html">Atten AT-R1825 </a></li>
+                	  <li><a href="http://www.batronix.com/shop/soldering/Atten-AT-R3028.html">Atten AT-R3028 </a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatImg">
+                    <a href="http://www.batronix.com/shop/soldering/accessory.html">
+                      <img alt="Accessory" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/stand-Oblique-A-120-101.png">
+                    </a>
+                  </div>
+                  <div class="menuCatLinks">
+                    <h1>Accessory</h1>
+                    <ul>
+                	  <li><a href="http://www.batronix.com/shop/soldering/accessory.html">Accessory</a></li>
+                    </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <!-- Löttechnik Ende --></div>
+      </div>
+      <div class="menuButton"> <a id="menuItem3" class="menuItem" href="http://www.batronix.com/shop/software/index.html"> <span class="menuTabLeft"></span><span class="menuTabMiddle">Software</span><span class="menuTabRight"></span> </a>
+        <div id="menutab3en" class="menuContent menuTab">              <!-- Inhalt Software -->
+              <div class="menuColumnWide" style="width: 400px;">
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>Development Software</h1>
+                  </div>
+                  <div class="menuCatLinks">
+                    <ul>
+			          <li>
+			            <a href="http://www.batronix.com/shop/software/prog-express/index.html">
+                          <div class="menuCatImgSmall"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/prog-express-productbox-70.gif" alt="Prog-Express Box" class="floatleft" height="110" width="70"></div>
+			              Prog-Express (Freeware)
+                          <p>Prog-Express is a modern, intuitive and free control software for the Batronix USB programming devices.</p>
+                          <div class="clearboth"></div>			        
+			            </a>
+			          </li>
+			        </ul>
+                  </div>
+                  <div class="menuCatLinks">
+                    <ul>
+			          <li>
+			            <a href="http://www.batronix.com/shop/software/chip-tuner/chip-tuning.html">
+                          <div class="menuCatImgSmall"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/chip-tuner-box-70x110.gif" alt="Chip-Tuning Module" class="floatleft" height="110" width="70"></div>
+			              Chip Tuner Module
+                          <p>Adds 2D and 3D data views and automatic engine map detection to Prog-Express.</p>
+                          <div class="clearboth"></div>			        
+			            </a>
+			          </li>
+			        </ul>
+                  </div>
+                  <div class="menuCatLinks">
+                    <ul>
+			          <li>
+			            <a href="http://www.batronix.com/shop/software/prog-studio/index.html">
+			              <div class="menuCatImgSmall"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/prog-studio-box-70x110.jpg" alt="Prog-Studio Box" class="floatleft" height="110" width="70"></div>
+			              Prog-Studio 9
+                          <p>Prog-Studio  is a modern, comprehensive, 
+and very productive micro-controller development environment for 
+industry standard 8051 (MCS-51) microcontroller architecture chips. </p>
+                          <div class="clearboth"></div>			        
+			            </a>
+			          </li>
+			        </ul>
+                  </div>
+                  <div class="menuCatLinks">
+                    <ul>
+			          <li>
+			            <a href="http://www.batronix.com/shop/software/eagle/index.html">
+                          <div class="menuCatImgSmall"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/eagle-productbox.png" alt="Eagle Logo" class="floatleft" height="97" width="70"></div>
+                          Eagle Layout and Schematics Software
+                          <p>This popular layout and schematic editor 
+software is a powerful environment to create electrical layouts and 
+schematics on Windows, Mac or Linux.</p>			        
+                          <div class="clearboth"></div>
+			            </a>
+			          </li>
+			        </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="menuColumn" style="width: 280px;">
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>More Software</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/software/uC51/c-compiler.html">Wickenhäuser µC/51</a></li>
+			          <li><a href="http://www.batronix.com/shop/software/databook/databook.html">IC Databook (Freeware)</a></li>
+			          <li><a href="http://www.batronix.com/shop/software/prog-studio6/assembler.html">Prog-Studio 6</a></li>
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>Device Software / Driver</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Acute">Acute</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Batronix">Batronix</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Cadsoft">Cadsoft (Eagle)</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Conitec">Conitec</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Elnec">Elnec</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Leap">Leap / Leaptronix</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Owon">Owon</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Rigol">Rigol</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#uc51">Wickenhäuser (µC51 C-Compiler)</a></li>
+			          <li><a href="http://www.batronix.com/shop/downloads/index.html#Xeltek">Xeltek</a></li>			        
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div> 
+              <!-- Software Ende --></div>
+      </div>
+      <div class="menuButton"> <a id="menuItem4" class="menuItem" href="http://www.batronix.com/shop/electronic/index.html"> <span class="menuTabLeft"></span><span class="menuTabMiddle">Know-How</span><span class="menuTabRight"></span> </a>
+        <div id="menutab4en" class="menuContent menuTab">              <!-- Inhalt Know-How -->
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>Construction Manuals</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/programmer/eprom-programmer-3_4/index.html">Eprom Programmer 3.4 </a></li>
+			          <li><a href="http://www.batronix.com/shop/programmer/mc-programmer1/mc-programmer.html">Flash MC Programmer I </a></li>
+			          <li><a href="http://www.batronix.com/shop/programmer/mc-programmer2/mc-programmer-2.html">Flash MC Programmer II </a></li>
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>References</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/downloads/instruction-set.html">8051 Microcontroller Instruction Set</a></li>
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div>
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>Basic Information</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/electronic/eprom-programming.html">Memory Chips Programming</a></li>
+			          <li><a href="http://www.batronix.com/shop/electronic/bosch-part-numbers.html">Bosch Part Numbers</a></li>
+			          <li><a href="http://www.batronix.com/shop/electronic/chip-packages.html">Chip Packages</a></li>
+			          <li><a href="http://www.batronix.com/shop/electronic/parallelport-programming.html">Parallelport Programming</a></li>
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div> 
+              <div class="menuColumn">
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>Recommendations</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/miscellaneous/link-recommendations.html">Links</a></li>
+			          <li><a href="http://www.batronix.com/shop/miscellaneous/book-recommendations.html">Books</a></li>
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+                <div class="menuCat">
+                  <div class="menuCatLinks">
+                    <h1>Batronix Newsletter</h1>
+                    <ul>
+			          <li><a href="http://www.batronix.com/shop/electronic/newsletter.html">Batronix Newsletter Un-/Subscribe</a></li>
+			        </ul>
+                  </div>
+                </div><div class="clearboth"></div>
+              </div> 
+              
+              <!-- Ende Know-How --></div>
+      </div>
+    </div>
+
+    <!-- Suche -->
+
+    <form method="post" action="http://www.batronix.com/php/index.php" id="headerquery">
+      <div id="header_searchbtn">
+        <input name="cmd" value="find" type="hidden">
+        <input id="queryloc" name="loc" value="en" type="hidden">
+        <input alt="Go" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/search.gif" name="image2" type="image">
+      </div>
+      <div id="header_search">
+        <input value="search..." size="16" class="header_input" id="query" name="query" type="text">
+      </div>
+    </form>
+
+  <!-- Header-Ende -->
+  
+  </div>
+</div>
+<!-- #EndLibraryItem --><div id="content_background"> <!-- Content-Start -->
+    <div id="content_container"> <!-- Content-Container-Start -->
+
+      <div id="header_navhelper"> <!-- Navhelper-Start -->
+        <ul id="navhelper">
+<li><a href="http://www.batronix.com/shop/index.html" title="Home"><span class="navhome"></span></a></li>
+          <li><a href="http://www.batronix.com/shop/electronic/index.html" title="Know-How"><span class="navhelpleft"></span><span class="navhelpmid">Know-How</span><span class="navhelpright"></span></a></li>
+          <li><span class="navhelpleft nolink"></span><span class="navhelpmid nolink">Basic information about memory chips and programming</span><span class="navhelpright nolink"></span></li>
+        </ul>
+      </div> <!-- Navhelper-End -->
+      <div class="clearboth"><!--  --></div><!-- #BeginLibraryItem "/Library/Login-Cart-en.lbi" --><!-- Konto Login -->
+
+<form method="post" action="http://www.batronix.com/php/index.php?cmd=dologin">
+  <div id="header_login">
+    <input name="loc" value="en" type="hidden">
+    <input id="referrerlo" value="http://www.batronix.com/shop/index.html" title="referrer" name="referrer" type="hidden">
+    <script type="text/javascript"><!-- document.getElementById("referrerlo").setAttribute("value", window.parent.location.href); --></script>
+    <button type="submit" id="login">Account</button>
+  </div>
+</form>
+
+<!-- Warenkorb Info -->
+
+<form method="post" action="http://www.batronix.com/php/index.php">
+  <div id="header_cartinfo"> 
+    <!-- TODO! (aber grad nicht wichtig) <div id="cdataframe">
+          <iframe id="cartdata" src="https://www.batronix.com/php/index.php?cmd=cartinfo&new#test"></iframe>
+        </div> -->
+    <input id="referrerca" value="http://www.batronix.com/shop/index.html" title="referrer" name="referrer" type="hidden">
+    <script type="text/javascript"><!-- document.getElementById("referrerca").setAttribute("value", window.parent.location.href); --></script>
+    <input value="cart" name="cmd" type="hidden">
+    <input value="en" name="loc" type="hidden">
+    <button type="submit" id="cartinput">Your Cart</button>
+  </div>
+</form>
+<div class="clearboth"></div>
+<!-- #EndLibraryItem --><div class="colwrapper">
+        <div class="colright">
+<!--AM2SocialsStart-->
+<!--AM2SocialsEnd--><!-- #BeginLibraryItem "/Library/right-en.lbi" --><!-- rechte Spalte -->
+<div id="sidebar-container" class="ui-corner-all">
+  <div class="sidebar-box ui-corner-all">
+    <div class="sidebar-content supportbg">
+      <h1>Contact / Support</h1>
+      <p> Batronix<br>
+        <br>
+        Lise-Meitner-Str. 1-7<br>
+        24223 Schwentinental<br>
+        Germany<br>
+        <br>
+        <a href="http://support.batronix.com/index.php?/Default/Tickets/Submit">Contact Us</a><br>
+        <br>
+        Fax: +49 (0)4307/8243-39 </p>
+    </div>
+  </div>
+  <div class="sidebar-box ui-corner-all">
+    <div class="sidebar-content"><img alt="Credit Card, PayPal, COD, ..." src="Basic%20information%20about%20memory%20chips%20and%20programming_files/payment-options-en.gif"></div>
+  </div>
+   
+
+  <div class="sidebar-box ui-corner-all">
+    <div class="sidebar-content"> <a href="http://www.batronix.com/shop/rigol/Rigol-Distributor-Batronix.html"><img src="Basic%20information%20about%20memory%20chips%20and%20programming_files/rigol-distributor-gold-medal-for-batronix-220.jpg" alt="Batronix once more leading Rigol Distributor in the EU" style="margin-bottom:5px;" height="146" width="220"></a>
+      <p>Batronix once more leading Rigol Distributor in the EU</p>
+      <p><a href="http://www.batronix.com/shop/rigol/Rigol-Distributor-Batronix.html">Read more about the success story...</a></p>
+    </div>
+  </div> 
+  
+<div class="tp_-_box" data-tp-settings="domainId:985470,bgBarColor:32312E,borderRadius:4,borderColor:DBDBDB,showHeader:False,showRatingText:False,showUserImage:False,width:240,numOfReviews:2,fontBarColor:F6A800,useDarkLogo:False,height:300,reviews1StarsSelected:True,reviews2StarsSelected:True,reviews3StarsSelected:True,showSelectedRatings:False"> <a style="display: none;" href="http://www.trustpilot.com/review/www.batronix.com" rel="nofollow" hidden="">Batronix Reviews</a> <div class="tpiframe-wrapper"><iframe style="display: block;" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/185ef979b5a76bdad43b932b276c12c6.htm" scrolling="no" id="tpiframe-box0" frameborder="0" height="344" width="240"></iframe></div></div>
+<script type="text/javascript">
+    (function () { var a = "https:" == document.location.protocol ? "https://ssl.trustpilot.com" : "http://s.trustpilot.com", b = document.createElement("script"); b.type = "text/javascript"; b.async = true; b.src = a + "/tpelements/tp_elements_all.js"; var c = document.getElementsByTagName("script")[0]; c.parentNode.insertBefore(b, c) })();
+</script>
+
+  <div class="sidebar-content centered"> <img alt="Batronix is an official Rigol premium distributor." src="Basic%20information%20about%20memory%20chips%20and%20programming_files/rigol_premium.png" style="margin-bottom:10px;"><br>
+    <img alt="Batronix is an official Owon premium distributor." src="Basic%20information%20about%20memory%20chips%20and%20programming_files/owon_premium.png" style="margin-bottom:25px;"><br>
+    <img alt="We deliver with DHL services." src="Basic%20information%20about%20memory%20chips%20and%20programming_files/dhl_shipment.png"> </div>
+</div>
+<!-- rechte Spalte End --><!-- #EndLibraryItem --></div> <!-- colright-end -->
+        <div class="colleft">
+
+      <div class="main_content ui-corner-all"> <!-- Inhalt Start -->
+
+        <h1>Basic information about memory chips and programming</h1>
+		                <p>We receive frequent inquiries on memory chips and 
+are repeatedly forced to note that there is still a very high 
+requirement for information in this area. For this reason, we are now 
+making the basic information for programming memory chips, such as 
+eproms/eeproms and Flash chips, public here. In particular, we will 
+discuss the various types of memory chips and compare what the 27C, 28C 
+or 29F series, for instance, can and cannot do.</p>
+		                <ul class="enumeration"><li><a href="#01">What is a memory chip?</a></li>
+		                  <li><a href="#02">Organization of a memory chip</a></li>
+                          <li><a href="#03">EPROM memory chips (27 / 27C...)</a></li>
+                          <li><a href="#04">EEPROM memory chips (28C...)</a></li>
+                          <li><a href="#05">FLASH EPROMS (28F..., 29C..., 29F...)</a></li>
+                          <li><a href="#06">Serial EEPROMS (24C..., 25C..., 93C...)</a></li>
+                          <li><a href="#07">RAM (52..., 62...)</a></li>
+                          <li><a href="#08">NVRAM (48Z..., DS12..., XS22...)</a></li>
+                          <li><a href="#09">Microcontroller</a></li>
+                          <li><a href="#10">Erasure of eproms with ultraviolet light</a></li>
+                          <li><a href="#11">Memory chip names and how to find replacement chips</a></li>
+        </ul>
+        <div class="clearboth"></div><h2 class="content"><a name="01" id="01"></a>What is a memory chip?</h2>
+        <p><a href="http://www.batronix.com/images/products/chips/PLCC32-250-177.gif" rel="thumbnail" title="Chip im DIP Gehäe"></a><a href="http://www.batronix.com/images/products/chips/DIP28-250-166.gif" rel="thumbnail" title="Chip im DIP Gehä"></a>A
+ memory chip is an electronic component in which a program, data or both
+ can be stored. In this context, a program is a series of commands 
+(command string) for a microprocessor (= computing unit). Data could 
+consist, for instance, of temperature values taken by a temperature 
+measurement system, or any other data.</p>
+        <p>The program / data are stored in the memory chip as a series 
+of numbers - zeros and ones (=bits). A bit can be either a zero or a 
+one. It is difficult for a person to gain an overview over these bits; 
+therefore, they are gathered into groups. Sixteen bits are a "word", 
+eight bits are a "byte" and four bits are a "nibble".</p>
+        <p>The most commonly used term is the byte, which contains 8 
+bits and can accept 2 to the 8th power = 256 different values. In order 
+to represent these, the hexadecimal number system is used. This is based
+ on a number of 16 and uses the digits 0 to 9 and additionally, A to F. 
+Therefore, two digits can also accept 256 values (from 00h to FFh, 
+wherein the small "h" only identifies the hexadecimal number). We would 
+like to direct those who need more precise information about the number 
+systems to suitable other locations.</p>
+        <p>The terms kilo and mega with regard to bytes were also 
+adapted to the binary nature (zero or one) of the digital systems. Here,
+ kilo means 1024 (= 2 to the 10th power) and mega means 1024 * 1024 = 
+1048576. Therefore a kilobyte is 1024 bytes and a megabyte is 1048576 
+bytes. </p>
+        <div class="clearboth"></div><h2 class="content"><a name="02" id="02"></a>Organization of a memory chip</h2>
+        <p><a href="http://www.batronix.com/images/products/chips/TSOP48-250-142.gif" rel="thumbnail" title="Chip im DIP Gehäe"></a>For
+ the 8 bit memory chips (the most common type) the bits are put together
+ in a byte (= 8 bits) and stored under an "address". The bytes can be 
+accessed at this address and then the eight bits of the accessed address
+ are output on its eight data ports. For example, in an 8-megabit chip 
+like the 27c801, there are altogether 1048576 bytes (= 8388608 bits). 
+Each byte has its own address, numbered from 00000h through FFFFFh 
+(corresponding to the decimal 0 to 1048575).</p>
+             <p>Aside from the 8 bit memory chips, there are also 16 bit memory chips, serial 1-bit memory chips and (rarely/old) 4 bit chips.</p>
+             <div class="clearboth"></div><h2 class="content"><a name="03" id="03"></a>EPROM memory chips (27 / 27C...)</h2>
+        <p><a href="http://www.batronix.com/images/products/chips/QFP44-250-182.gif" rel="thumbnail" title="Chip im DIP Gehäe"></a>EPROM stands for Erasable Programmable Read Only Memory. What does this mean in detail?</p>
+        <p>"Erasable" means that the data on it can be removed. With 
+these chips, erasure is carried out by exposure to intensive ultraviolet
+ light in the area of 254 nm wavelength. We deal with erasing eproms 
+with UV-C light in further detail below.</p>
+        <p>"Programmable" means that a program or data can be programmed
+ (burned) into this chip. For programming, a programming device such as 
+the Batronix Eprommer or the Galep-4 is required.</p>
+        <p>"Read Only Memory" means that this type of memory can be read out but not programmed in the target device.</p>
+        <p>This memory type can be burned (programmed) by a programming 
+device and then retains its data until an erasing device erases it. 
+During the programming process, any desired number of bits from one to 
+zero can be programmed. Eproms can also be programmed repeatedly without
+ being erased as long as the bits are only changed from one to zero or 
+remain on zero. To change a bit from zero to one, erasure is necessary.</p>
+        <p>Since the quartz glass window required for erasure with UV-C 
+light is a big part of the production costs for the chip, this chip is 
+available with and without this window. Without the window, the chip 
+cannot be erased using UV-C light. The eproms with windows are also 
+called UV eproms; the ones without windows are called OTP (=One Time 
+Programmable) eproms.</p>
+        <p>After programming an eprom that is erasable with UV-C light, 
+the glass window should be closed with a sticker so no sunlight can 
+enter. Sunlight also contains components of UV-C light and can 
+eventually erase data from the eprom.</p>
+        <p>In the name of an EPROM, the "C" after the 27 indicates that 
+it is a CMOS EPROM (CMOS=Complimentary Metal Oxide Semiconductor). These
+ require a much lower performance than the old NMOS EPROMS and can 
+function with lower programming voltages (12.5 volts) (NMOS=N-channel 
+Metal Oxide Semiconductor). Since both chips are otherwise compatible, 
+the old NMOS EPROMS can be replaced with CMOS EPROMS of the same size 
+(e.g. a 2764 can be replaced by a 27C64).</p>
+        <div class="clearboth"></div><h2 class="content"><a name="04" id="04"></a>EEPROM memory chips (28C...)</h2>
+        <p><a href="http://www.batronix.com/images/products/chips/SOP44-250-174.gif" rel="thumbnail" title="Chip im DIP Gehäe"></a>The
+ name EEPROM stands for Electrically Erasable Programmable Read Only 
+Memory. These are constructed like EPROMS, but allow the erasing of 
+individual bytes or the entire memory space electrically without UV 
+light. Since individual bytes can be erased without erasing everything, 
+these individual bytes can be overwritten, in effect. However, with an 
+EEPROM, the burning process clearly takes longer than with an EPROM - up
+ to several milliseconds per byte. To make up this disadvantage, EEPROMS
+ like AT28C256's were equipped with a function for the programming of 
+so-called blocks. In this process, 64, 128 or 256 bytes at once are 
+loaded into the memory chip and programmed simultaneously as a block. 
+This clearly shortens programming times.</p>
+        <p>The additional internal cost for electrical erasure as well 
+as the block writing function, if desired, makes the EEPROMS more 
+expensive than the EPROMS.</p>
+        <div class="clearboth"></div><h2 class="content"><a name="05" id="05"></a>FLASH EPROMS (28F..., 29C..., 29F...)</h2>
+        <p>These chips can be erased electrically - completely or by the
+ block - and some - like the AT28C... with the EEPROMS) can be 
+programmed by the block as well. The Flash EPROMS, however, cannot 
+always be used as a replacement for a normal eprom. Reasons include, for
+ instance, that the Flash eproms, even the ones with a small amount of 
+memory space, are only available in housings with 32 or more pins. A 
+28F256 with 32 pins is therefore not pin compatible to a 27C256 with 28 
+pins and the same memory capacity.</p>
+  <div class="clearboth"></div><h2 class="content"><a name="06" id="06"></a>Serial EEPROMS (24C..., 25C..., 93C...)</h2>
+        <p>With these chips, serial means that data output and address 
+naming takes place bit by bit (=serially). This means that only one bit 
+at a time can be accessed, and the accessed address must be communicated
+ bit by bit as well, but it has the major advantage that the serial 
+EEPROM comes with a small 8-pin housing. These chips are therefore 
+popular when space or accessing cables are to be saved and no large 
+amounts of data or high speeds are required.</p>
+  <div class="clearboth"></div><h2 class="content"><a name="07" id="07"></a>RAM (52..., 62...)</h2>
+        <p>The name RAM stands for "Random Access Memory" (= memory with
+ selectable access). These memory devices can be written to very quickly
+ (in this case, it is generally referred to as writing, not burning) and
+ each byte can be overwritten just as quickly and easily, i.e. it does 
+not need to be erased first. The disadvantage of this technology is that
+ the chips lose their memory space when the power supply is cut off.</p>
+  <div class="clearboth"></div><h2 class="content"><a name="08" id="08"></a>NVRAM (48Z..., DS12..., XS22...)</h2>
+        <p>The name NVRAM stands for Non Volatile Random Access Memory. 
+These chips have the major advantages of the RAM chips (very high speed 
+and easy overwriting of existing data) and retain their data when power 
+is cut off.</p>
+        <p>This can be achieved in two ways: The first group removes the
+ disadvantage of the original RAMS with a built-in battery that protects
+ the memory space from losing its data when the power is cut off. 
+According to the manufacturer, the battery lasts for ten years according
+ to type.</p>
+        <p>The second group has an equally large EEPROM and when the 
+power is cut off, it stores all data from the RAM on the EEPROM. When 
+the power is restored, data are EEPROM copied back into the RAM. The 
+advantages of fast RAM access and easy overwriting remain.</p>
+        <div class="clearboth"></div><h2 class="content"><a name="09" id="09"></a>Microcontroller</h2>
+        <p>A microcontroller is a complete system, consisting of the CPU
+ (computing unit/microprocessor), the programming memory (FLASH or 
+EPROM), working memory (RAM) and in/output on a chip. These chips are 
+put into many devices as "mini-PC's" and guide, for instance, printers, 
+heaters, microwaves, alarm clocks etc..</p>
+           <div class="clearboth"></div><h2 class="content"><a name="10" id="10"></a>Erasure of eproms with ultraviolet light</h2>
+        <p>With these chips, erasure takes place by exposure to 
+intensive ultraviolet light in the area of 254 nm wavelength. Since UV-C
+ light is very dangerous to the eyes and also carcinogenous, these chips
+ are erased in special eprom erasure devices. These only allow the light
+ to be turned on after the housing is closed. When the housing is 
+opened, the light is immediately switched off. Erasure takes 5 to 25 
+minutes, varying with light intensity and other conditions.</p>
+        <p>We have often been asked whether eproms can also be erased 
+with a face-tanning device or similar. This is, however, not possible, 
+since the UV-C wavelength of the light is filtered out in these devices.
+ Erasure using daylight is, on the other hand, possible, since sunlight 
+contains the required wavelength. This is, however, not of practical use
+ since it would require a few weeks of bright sunshine.</p>
+        <div class="clearboth"></div><h2 class="content"><a name="11" id="11"></a>Memory chip names and how to find replacement chips</h2>
+        <p>The name of a memory chip contains the abbreviation for the 
+manufacturer, the technology, the memory size, the fastest permitted 
+accessing speed, the temperature range, the form of housing as well as 
+further internal manufacturer's data. Different manufacturers often use 
+very different names, however the chips with similar data under the 
+various manufacturers are usually compatible.</p>
+        <p>It takes practice to correctly interpret the name of a memory
+ chip. But it generally does not take long to learn and once learned, it
+ is normally easy to determine a replacement type. A replacement type 
+should utilize the same technology (EPROM/ EEPROM/ FLASH/ etc.), have 
+the same size of memory and the same or a shorter access time and if 
+applicable, the same or a better temperature range.</p>
+        <p>In the case of an existing memory chip, one first looks for 
+the technology description on the housing, e.g. 27C, 28C, 29F etc.. An 
+abbreviation for the manufacturer is usually in front of it (e.g. AT for
+ Atmel). After it, one finds the memory size in bits, which can be given
+ in different ways according to the manufacturer:</p>
+        <p>Selected possible memory sizes:<br>
+          16 = 16 KBit<br>
+          32 = 32 KBit<br>
+          64 = 64 KBit<br>
+          128 = 128 KBit<br>
+          256 = 256 KBit<br>
+          512 = 512 KBit<br>
+          1001 or 010 = 1 MBit<br>
+          2001 or 020 = 2 MBit<br>
+          4001 or 040 = 4 MBit<br>
+          8001, 080 or 801= 8 MBit<br>
+          016 = 16 MBit</p>
+        <p>It should be noted that memory size is given in bits and not 
+in bytes. After the memory size, there may be a version name, such as 
+"B", and then a hyphen. After the hyphen, the fastest permitted access 
+speed is given in nanoseconds (1/1000000000 second). This is the maximum
+ delay time between the inputting of an address and the outputting of 
+the data to the ports of the memory chips. This entry takes some getting
+ used to as well, since it is given in two digits:</p>
+        <p>Selected possible access speeds:<br>
+          45 = 45 ns<br>
+          60 = 60 ns<br>
+          70 = 70 ns<br>
+          90 = 90 ns<br>
+          10 = 100 ns<br>
+          12 = 120 ns<br>
+          15 = 150 ns<br>
+          20 = 200 ns<br>
+          25 = 250 ns</p>
+        <p>After the maximum access speed, there is an abbreviation for 
+the housing type and the permitted temperature range. Since these can 
+vary, one should check the data sheet if in doubt. Data sheets can be 
+easily located via search engines such as www.google.com, using the term
+ for the chip + the word "datasheet" as search terms (for example, 
+27c256 +datasheet).</p>
+        <p>Knowing this, the label M27C1001-10F1 now tells us that it is
+ an eprom (=27C) with 1 MBit of memory (=1001) with an access time of 
+100 ns (=10) in the DIP housing (=F) with a permissible temperature 
+range of 0 to 70 degrees Celsius (=1).</p>
+        <p>In a further line of labeling on the memory chip, one then 
+finds the date of manufacture (the date code). This is the year (given 
+in two digits) and the calendar week. A chip with a date code 0109 is 
+therefore from the 9th calendar week in 2001. </p>
+
+      </div> <!-- Inhalt-End --><!-- #BeginLibraryItem "/Library/footerboxes-en.lbi" --><div id="topfooter">
+  <div id="topfooter_content">
+    <div class="footer-box ui-corner-all">
+      <div class="footerbox-content">
+        <div class="footerCatLinks footerColumn">
+          <h1>Information</h1>
+          <ul class="hover">
+            <li><a href="http://support.batronix.com/index.php?/Default/Knowledgebase/List/Index/4/faq-english">FAQ</a></li>
+            <li><a href="http://support.batronix.com/index.php?/Default/Knowledgebase/Article/View/27/11/how-much-does-shipping-cost">Shipping costs</a></li>
+            <li><a href="http://support.batronix.com/index.php?/Default/Knowledgebase/Article/View/28/11/how-long-does-shipping-take">Shipping time</a></li>
+            <li><a href="http://www.batronix.com/shop/faq/return-policies.html">Return Policies</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/reference.html">References</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/testimonials.html">Testimonials</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box ui-corner-all">
+      <div class="footerbox-content">
+        <div class="footerCatLinks footerColumn">
+          <h1>Contact</h1>
+          <ul>
+            <li>
+              <h3>Batronix</h3>
+              <p>Lise-Meitner-Str. 1-7<br>
+                24223 Schwentinental<br>
+                Germany </p>
+            </li>
+            <li>
+              <h4><a href="http://support.batronix.com/index.php?/Default/Tickets/Submit">Contact Us</a></h4>
+            </li>
+            <li>
+              <h4><a href="javascript:linkTo_ServiceMailto();">service<img class="emailsm" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/atsm3.gif" alt="@">batronix.com</a></h4>
+            </li>
+            <li>
+              <h4>Fax: +49 (0)4307/8243-39</h4>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box ui-corner-all" style="margin-right:0">
+      <div class="footerbox-content">
+        <div class="footerCatLinks footerColumn">
+          <h1>10 good Reasons</h1>
+          <ul class="hover">
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#01">Manufacturer and Merchant</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#02">Competent Consulting</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#03">Attractive Pricing</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#04">Fast and Flexible Shipping</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#05">Fair Shipping Costs</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#06">Many payment options</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#07">No Minimum Order Amount</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#08">30 Day Trial Period</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#09">Best Customer Service</a></li>
+            <li><a href="http://www.batronix.com/shop/shopping/Batronix.html#10">Best References</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- #EndLibraryItem --></div> <!-- colleft-end -->
+      </div> <!-- colwrapper-end -->
+      <div class="clearboth"></div>
+
+    </div> <!-- Content-Container End -->
+  </div> <!-- Content-End --><!-- #BeginLibraryItem "/Library/footer-en.lbi" --><div id="footer_container">
+  <div id="footer_content">
+        <div class="footer_links">Copyright 1999-2014 by Batronix<span>-</span><a href="http://www.batronix.com/shop/shopping/privacy.html">Privacy</a><span>-</span><a href="http://www.batronix.com/shop/shopping/contact.html">Contact</a></div>
+      </div>
+    </div><!-- #EndLibraryItem --><script type="text/javascript" src="Basic%20information%20about%20memory%20chips%20and%20programming_files/js_002.php"></script>
+  <!-- #BeginLibraryItem "/Library/beforebodytag-d.lbi" -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2335747-5']);
+  _gaq.push (['_gat._anonymizeIp']);
+  _gaq.push(['_setDomainName', '.batronix.com']);
+  _gaq.push(['_trackPageview']);  
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+    <!-- #EndLibraryItem -->
+
+  
+
+</body></html>

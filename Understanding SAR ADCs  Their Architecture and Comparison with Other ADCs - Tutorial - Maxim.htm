@@ -1,0 +1,2236 @@
+<html><head><script src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/widgets.js" type="text/javascript"></script><script src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/client.js" async="" type="text/javascript" id="LR1"></script><script src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/widgets.js" type="text/javascript"></script><link media="all" href="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/widget120.css" type="text/css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Understanding SAR ADCs: Their Architecture and Comparison with Other ADCs - Tutorial - Maxim</title>
+
+<meta name="keywords" content="sar,successive approximation,adc,analog to digital,converter,precision">
+<meta name="description" content="Article explains the basics of successive-approximation-register (SAR) analog-to-digital converters (ADCs). Article contrasts a SAR ADC with pipeline, flash, and sigma-delta ADCs.">
+<link rel="canonical" href="http://www.maximintegrated.com/app-notes/index.mvp/id/1080">
+
+<link rel="stylesheet" type="text/css" href="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/default.css">
+<link rel="stylesheet" type="text/css" href="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/firefox.css">
+
+
+<script src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/elqCfg.js" async="" type="text/javascript"></script><script async="" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/cbgapi.loaded_0"></script><script id="undefined" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/base-min.js"></script>
+<script type="text/javascript">
+init_major_vars();
+if (Lang) { Lang.select('en'); }
+</script>
+<script type="text/javascript">
+var Mary = new Array(    "0",    "1");
+</script>
+
+
+<script type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/AutoTracker.js"></script>
+<script type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/ga_header.js"></script>
+<script type="text/javascript">
+    if (typeof(Mary) != 'undefined' && Mary[0] == 1) { _gaq.push(set_GA_CV1); }
+</script>
+
+
+
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,.fb_connect_bar_container span,.fb_connect_bar_container a,.fb_connect_bar_container img,.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}.fb_connect_bar a:hover{color:#fff}.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}.fb_connect_bar div a,.fb_connect_bar span,.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}</style></head>
+<body data-twttr-rendered="true" class="s01" width="960" leftmargin="0" topmargin="0" alink="#0000FF" bgcolor="#FFFFFF" link="#0000FF" marginheight="0" marginwidth="0" text="#000000" vlink="#0000FF"><iframe src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/hub.htm" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrameSecure" tabindex="0" scrolling="no" allowtransparency="true" id="twttrHubFrameSecure" frameborder="0"></iframe><iframe src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/hub_002.htm" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrame" tabindex="0" scrolling="no" allowtransparency="true" id="twttrHubFrame" frameborder="0"></iframe><div style="visibility: hidden; position: absolute; overflow: hidden; padding: 0px; width: 0px; left: 0px; top: 0px;" id="WzTtDiV"></div>
+
+
+
+
+
+
+    <!-- FILE CACHE [3518] (SITE HEADER): MISS -->
+<!-- ================================================================== -->
+<!-- BEGIN: SITE HEADER -->
+<!-- ================================================================== -->
+
+<div id="site-header" align="center">
+<div id="site-header-edge1"></div>
+<table id="site-header-table1" cellpadding="0" cellspacing="0" border="0" width="960">
+<tbody><tr valign="top">
+<td id="site-header-box1" width="100%">
+
+<!-- ======================================= -->
+
+<!-- BEGIN: SITE CONTROL PANEL (scp) -->
+<div id="scp-shell">
+
+<table id="scp-table1" cellpadding="4" cellspacing="0" border="0" width="100%">
+<form name="scp_form"></form>
+<tbody><tr valign="middle">
+    <td id="scp-box1" align="left" width="98%">
+    <br>
+    </td>
+    <td id="scp-box2" align="right" width="1%">
+    
+
+
+<!-- BEGIN: MYMAXIM CONTROL -->
+<nobr>
+<a class="scp" href="https://memcenter.maximintegrated.com/guest/login.mvp?auto_return=1&amp;goal_url=http%3A%2F%2Fwww.maximintegrated.com%2Fapp-notes%2Findex.mvp%2Fid%2F1080">Login</a>
+&nbsp;&nbsp;&nbsp; <a class="scp" href="https://memcenter.maximintegrated.com/guest/register.mvp?goal_url=http%3A%2F%2Fwww.maximintegrated.com%2Fapp-notes%2Findex.mvp%2Fid%2F1080">Register</a>
+</nobr>
+<!-- END: MYMAXIM CONTROL -->
+
+
+
+    
+    </td>
+    <td id="scp-box3" align="right" width="1%">
+    
+
+
+<noscript>
+<style>
+/* select.s90 { display: none; } */
+#scp-lang-menu { display: none; }
+</style>
+<a class=s02 Href="http://www.maximintegrated.com/console/lang/router.mvp?lang=en&url=http%3A%2F%2Fwww.maximintegrated.com%2Fapp-notes%2Findex.mvp%2Fid%2F1080">English</a>
+</noscript>
+
+<!-- BEGIN: LANG SWITCH MENU -->
+<select id="scp-lang-menu" name="lsw_menu" onchange="lsw_change_cb();">
+<option value="http://www.maximintegrated.com/app-notes/index.mvp/id/1080" selected="selected"> English
+</option><option value="http://china.maximintegrated.com/app-notes/index.mvp/id/1080"> 简体中文 (cn)
+</option><option value="http://japan.maximintegrated.com/app-notes/index.mvp/id/1080"> 日本語 (jp)
+</option></select>
+<!-- END: LANG SWITCH MENU -->
+
+<script language="Javascript">
+function lsw_change_cb()
+{
+    // var menu = document.site_control_form.lsw_menu;
+    var menu = document.scp_form.lsw_menu;
+    var option = menu.options[menu.selectedIndex];
+    if (option.value) {
+	document.body.style.cursor = "wait";	// immediate feedback
+	window.location = option.value;
+    }
+    else {
+	alert("URL value is missing.");
+    }
+}
+</script>
+
+
+    
+    </td>
+</tr>
+
+</tbody></table>
+
+</div><!-- /scp-shell -->
+<!-- END: SITE CONTROL PANEL (scp) -->
+
+<!-- ======================================= -->
+
+<!-- BEGIN: SITE MARQUEE PANEL (smp) -->
+<div id="smp-shell">
+
+<table id="smp-table1" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody><tr valign="top">
+    <!-- LOGO CELL: keep div tight on the img for IE -->
+    <td id="smp-box1" align="left" width="98%">
+	<div id="site-logo-box"><a href="http://www.maximintegrated.com/"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/maxim-logo-202.gif" border="0" height="49" hspace="0" vspace="0" width="172"></a></div>
+    </td>
+
+    <!-- SPACER CELL -->
+    <td id="smp-box2" align="right" width="1%"><br></td>
+
+    <!-- OTHER CELL -->
+    <td id="smp-box3" align="right" width="1%"><br></td>
+</tr>
+</tbody></table>
+
+</div>
+<!-- END: SITE MARQUEE PANEL (smp) -->
+
+<!-- ======================================= -->
+
+<!-- BEGIN: SITE NAVBAR (snb) -->
+<div id="snb-shell">
+
+<table id="snb-table1" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody><tr align="left" valign="middle">
+    <!-- NAVBAR CELLS -->
+    <td id="snb-box1" align="left" width="98%">
+    <div id="snb-tab-shell">
+    <div id="snb-s1-cell"><nobr><a id="snb-s1-link" class="snb1" href="http://www.maximintegrated.com/products/" onclick="open_navpad('s1');return(false);">Products</a></nobr></div>
+    <div id="snb-s2-cell"><nobr><a id="snb-s2-link" class="snb1" href="http://www.maximintegrated.com/solutions/" onclick="open_navpad('s2');return(false);">Solutions</a></nobr></div>
+    <div id="snb-s3-cell"><nobr><a id="snb-s3-link" class="snb1" href="http://www.maximintegrated.com/design/" onclick="open_navpad('s3');return(false);">Design</a></nobr></div>
+    <div id="snb-s4-cell"><nobr><a id="snb-s4-link" class="snb1" href="http://www.maximintegrated.com/sales/" onclick="open_navpad('s4');return(false);">Buy</a></nobr></div>
+    <div id="snb-s5-cell"><nobr><a id="snb-s5-link" class="snb1" href="https://support.maximintegrated.com/" onclick="open_navpad('s5');return(false);">Support</a></nobr></div>
+    <div id="snb-s6-cell"><nobr><a id="snb-s6-link" class="snb1" href="http://www.maximintegrated.com/company/" onclick="open_navpad('s6');return(false);">About&nbsp;Us</a></nobr></div>
+    <div id="snb-s7-cell"><nobr><a id="snb-s7-link" class="snb1" href="https://my.maximintegrated.com/" onclick="open_navpad('s7');return(false);">My&nbsp;Maxim</a></nobr></div>
+    </div>
+    </td>
+
+    <!-- SPACER CELL -->
+    <td id="snb-box2" align="right" width="1%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+    <!-- SEARCH CELL -->
+    <td id="snb-box3" align="right" width="1%">
+    <div id="site-search-box" style="padding-bottom: 5px;">
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tbody><tr>
+	    <form name="power_search" method="get" action="http://www.maximintegrated.com/pst/run.mvp"></form>
+	    <td id="site-search-input-cell" align="left">
+	    <input id="site-search-input" name="q" size="35" maxlength="255" type="text">
+	    </td>
+	    <td id="site-search-btn-cell" align="center" width="1%"><input id="site-search-btn" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/magnify-200-en.jpg" value="submit" name="image" border="0" height="24" hspace="0" type="image" vspace="0" width="24"></td>
+	    
+	</tr>
+	</tbody></table>
+    </div>
+    </td>
+</tr>
+</tbody></table>
+
+</div>
+<!-- END: SITE NAVBAR (snb) -->
+
+<!-- ======================================= -->
+
+</td><!-- /site-header-box1 -->
+</tr>
+</tbody></table><!-- /site-header-table1 -->
+<div id="site-header-edge2" align="center"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/clear_dot.gif" height="1" width="960"><br></div>
+</div><!-- /site-header -->
+
+<!-- ======================================= -->
+
+<!-- BEGIN: SITE NAVPAD (snp) -->
+<!-- do not remove the height/display properties -->
+<div id="snp-drawer" style="display: none; height: 0px;" align="center">
+<div id="snp-drawer-frame">
+<div id="snp-drawer-body">
+<div id="snp-router" class="snp-router-shell" align="left">
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s1p1" class="snp-router-image-panel" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s1p2" class="snp-router-text-panel" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="http://www.maximintegrated.com/products/">Products Overview</a></b>
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="1" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr><a href="http://www.maximintegrated.com/products/1-wire-and-ibutton.mvp">1-Wire and iButton</a><br>
+<a href="http://www.maximintegrated.com/products/amps/">Amplifiers</a><br>
+<a href="http://www.maximintegrated.com/products/switches/">Analog Switches and Multiplexers</a><br>
+<a href="http://www.maximintegrated.com/products/audio/">Audio</a><br>
+<a href="http://www.maximintegrated.com/products/automotive/">Automotive</a><br>
+<a href="http://www.maximintegrated.com/products/clocks/">Clock Generation and Distribution</a><br>
+<a href="http://www.maximintegrated.com/products/data_converters/">Data Converters</a><br>
+<a href="http://www.maximintegrated.com/products/ds-ip/">Design Services and Analog IP Blocks</a><br>
+<a href="http://www.maximintegrated.com/products/data_converters/digi-pot/">Digital Potentiometers</a><br>
+<a href="http://www.maximintegrated.com/products/embedded-security/">Embedded Security</a><br>
+<a href="http://www.maximintegrated.com/products/energy/">Energy-Measurement and Metering SoCs</a><br>
+<a href="http://www.maximintegrated.com/products/filters/">Filters (Analog)</a><br>
+<a href="http://www.maximintegrated.com/products/interface/">Interface</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+<a href="http://www.maximintegrated.com/products/memory/">Memory</a><br>
+<a href="http://www.maximintegrated.com/products/microcontrollers/">Microcontrollers</a><br>
+<a href="http://www.maximintegrated.com/products/military/">Military and Aerospace</a><br>
+<a href="http://www.maximintegrated.com/products/optical/">Optical Communications</a><br>
+<a href="http://www.maximintegrated.com/products/power/">Power and Battery Management</a><br>
+<a href="http://www.maximintegrated.com/products/powerline/">Powerline Networking</a><br>
+<a href="http://www.maximintegrated.com/products/rtc/">Real-Time Clocks</a><br>
+<a href="http://www.maximintegrated.com/products/sensors/">Sensors and Sensor Interface</a><br>
+<a href="http://www.maximintegrated.com/products/supervisors/">Supervisors, Voltage Monitors, Sequencers</a><br>
+<a href="http://www.maximintegrated.com/products/t_e_carrier/">T/E Carrier and Packetized Communications</a><br>
+<a href="http://www.maximintegrated.com/products/video/">Video</a><br>
+<a href="http://www.maximintegrated.com/products/references/">Voltage References</a><br>
+<a href="http://www.maximintegrated.com/products/wireless/">Wireless and RF</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+</nobr></td></tr>
+</tbody></table>
+</div>
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b>Related:</b>
+    <a href="http://para.maximintegrated.com/">Parametric Search</a>
+    | <a href="http://www.maximintegrated.com/whatsnew/">What's New</a> | <a href="http://www.maximintegrated.com/patents/">Patent Marking</a>
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/tech_support/router.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+
+</div><!-- end slide text -->
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s2p1" class="snp-router-image-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s2p2" class="snp-router-text-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="http://www.maximintegrated.com/solutions/">Solutions Overview</a></b>
+    <!--
+    | <a href="/" onClick="view_section('s2','solutions','solutions-alpha.mvp');return(false);">Test</a>
+    -->
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="1" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr><b><a href="http://www.maximintegrated.com/solutions/nav/automotive/index.mvp">Automotive and Transpo...</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/automotive/electric_vehicles/index.mvp">Electric Vehicles</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/automotive/infotainment/index.mvp">Infotainment Systems</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/automotive/automotive-systems/index.mvp">Automotive Systems</a><br>
+<br>
+<b><a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/index.mvp">Communications and Net...</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/cable_infrastructure/index.mvp">Cable Infrastructure</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/datacom/index.mvp">Datacom</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/optical_networking/index.mvp">Optical Networking</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/telecom/index.mvp">Telecom</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/wireless_infrastructure/index.mvp">Wireless Infrastructure</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/communications_and_networking/wireless_lan/index.mvp">Wireless Network</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+<b><a href="http://www.maximintegrated.com/solutions/nav/consumer_electronics/index.mvp">Consumer Electronics</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/consumer_electronics/cell_phone_smartphone/index.mvp">Cell Phone/Smartphone</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/consumer_electronics/home-video/index.mvp">Home Video</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/consumer_electronics/mp3_portable_media/index.mvp">MP3/Portable Media Player</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/consumer_electronics/tablets/index.mvp">Tablets</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/consumer_electronics/wireless_handheld/index.mvp">Wireless Handheld</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+<b><a href="http://www.maximintegrated.com/solutions/nav/computing_and_storage/index.mvp">Computing and Storage</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/computing_and_storage/desktops_and_servers/index.mvp">Desktops and Servers</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/computing_and_storage/financial_terminals/index.mvp">Financial Terminals</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/computing_and_storage/notebook_computers/index.mvp">Notebook Computers</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/computing_and_storage/storage/index.mvp">Storage</a><br>
+<br>
+<b><a href="http://www.maximintegrated.com/solutions/nav/energy/index.mvp">Energy</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/energy/generation/index.mvp">Generation</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/energy/distribution/index.mvp">Distribution</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/energy/consumption/index.mvp">Consumption</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/energy/communications/index.mvp">Communications</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+<b><a href="http://www.maximintegrated.com/solutions/nav/industrial/index.mvp">Industrial</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/industrial/control_and_automation/index.mvp">Control and Automation</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/industrial/power/index.mvp">Industrial Power</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/industrial/test_and_measurement/index.mvp">Test and Measurement</a><br>
+<br>
+<b><a href="http://www.maximintegrated.com/solutions/nav/medical/index.mvp">Medical</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/medical/diagnostics/index.mvp">Diagnostics, Monitorin...</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/medical/home_medical/index.mvp">Home Medical</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/medical/imaging/index.mvp">Medical Imaging</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/medical/instruments/index.mvp">Medical Instruments</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+<b><a href="http://www.maximintegrated.com/solutions/nav/military-aerospace/index.mvp">Military and Aerospace</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/nav/military-aerospace/handheld-portable/index.mvp">Handheld/Portable</a><br>
+<a href="http://www.maximintegrated.com/solutions/nav/military-aerospace/satellite-ground/index.mvp">Satellite Ground Suppo...</a><br>
+<br>
+<hr size="1">
+<br>
+<b><a href="http://www.maximintegrated.com/solutions/nav/bba/index.mvp">Building Block Advisor</a></b><br>
+<a href="http://www.maximintegrated.com/solutions/analog-signal-chain/index.mvp">Analog Signal Chain</a><br>
+<a href="http://www.maximintegrated.com/solutions/power-architecture/index.mvp">Power Architecture</a><br>
+<a href="http://www.maximintegrated.com/solutions/fpga-power/index.mvp">FPGA Power</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+</nobr></td></tr>
+</tbody></table>
+</div>
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b>Related:</b>
+    <a href="http://www.maximintegrated.com/featured/analog-integration/">Analog Integration Microsite</a>
+    <!--
+    <a href="http://www.maximintegrated.com/solutions/nav/all-solutions.mvp?view=alpha">Alphabetical Listing</a>
+    -->
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/tech_support/router.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+
+</div><!-- end slide text -->
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s3p1" class="snp-router-image-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s3p2" class="snp-router-text-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="http://www.maximintegrated.com/design/">Design Overview</a></b>
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="20%">
+<nobr>
+<a href="http://www.maximintegrated.com/design/techdocs/index.mvp"><b>Technical Documents</b></a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/app-notes/index.mvp">Application Notes</a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/reference-designs/index.mvp">Reference Design Center</a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/tutorials/index.mvp">Tutorials</a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/product-guides/index.mvp">Product Guides</a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/solutions-guides/index.mvp">Solutions Guides</a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/brochures/index.mvp">Brochures</a><br>
+<a href="http://www.maximintegrated.com/design/techdocs/user-guides/index.mvp">User Guides and Manuals</a><br>
+<a href="http://www.maximintegrated.com/videos/index.mvp/label/Products">Product Videos</a><br>
+<a href="http://www.maximintegrated.com/videos/index.mvp/label/Demos">Demo Videos</a><br>
+<a href="http://www.maximintegrated.com/search/parts.mvp">Data Sheets</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="25%">
+<nobr>
+<a href="http://www.maximintegrated.com/design/tools/"><b>Design Tools, Models, Software</b></a><br>
+<a href="http://www.maximintegrated.com/design/tools/modeling-simulation/">Modeling/Simulation</a><br>
+<a href="http://www.maximintegrated.com/ee_sim/">EE-Sim</a><br>
+<a href="http://www.maximintegrated.com/design/tools/cad-layout/">CAD and Layout</a><br>
+<a href="http://www.maximintegrated.com/products/evkits/">Evaluation Kits</a><br>
+<a href="http://www.maximintegrated.com/cookbook/powersupply/">Power-Supply Cookbook</a><br>
+<a href="http://www.maximintegrated.com/design/tools/applications/">Applications Software</a><br>
+<a href="http://www.maximintegrated.com/design/tools/calculators/">Calculators</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="25%">
+<nobr>
+<a href="http://www.maximintegrated.com/design/manufacturing.cfm"><b>Packaging and Reliability</b></a><br>
+<a href="http://www.maximintegrated.com/design/packaging/index.mvp?a=0&amp;f=">Packaging Information</a><br>
+<a href="http://www.maximintegrated.com/design/packaging/index.mvp?a=1&amp;f=">Packaging Outline Drawings</a><br>
+<a href="http://www.maximintegrated.com/design/packaging/index.mvp?a=2&amp;f=">Land Pattern Drawings</a><br>
+<a href="http://www.maximintegrated.com/qa/">QA and Reliability Information</a><br>
+<div class="snp-link2">
+<a href="http://www.maximintegrated.com/emmi/">Environmental Management<br>and Materials Information<br>(EMMI)</a><br>
+</div>
+<a href="http://www.maximintegrated.com/emmi/content_lookup.cfm">Lead-Free/RoHS Lookup</a><br>
+<a href="http://www.maximintegrated.com/design/packaging/topmark/">Topmark Code Lookup</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="20%">
+<nobr>
+<a href="http://www.maximintegrated.com/design/find_products.cfm"><b>Part Selection</b></a><br>
+<a href="http://para.maximintegrated.com/">Parametric Search</a><br>
+<a href="http://www.maximintegrated.com/search/parts.mvp">Part Number Search</a><br>
+<a href="http://www.maximintegrated.com/whatsnew/">What's New</a><br>
+<a href="http://www.maximintegrated.com/products/cross_reference">Cross-Reference Search</a><br>
+<a href="https://support.maximintegrated.com/psa/router.mvp">Part Selection Advice</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="20%">
+<nobr>
+<a href="http://www.maximintegrated.com/design/fpga-design-resources/"><b>Design for FPGAs</b></a><br>
+<a href="https://support.maximintegrated.com/en/tech_support/router.mvp"><b>Technical Support</b></a><br>
+<a href="http://www.maximintegrated.com/samples/"><b>Free Samples</b></a><br>
+<a href="http://www.maximintegrated.com/glossary/"><b>EE Glossary</b></a><br>
+<a href="https://my.maximintegrated.com/ee-mail/outbox/msg.mvp?blast_id=current"><b>EE-Mail Newsletter</b></a><br>
+</nobr>
+</td>
+
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <!-- <b>Related:</b> -->
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/tech_support/router.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+</div><!-- end slide text -->
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s4p1" class="snp-router-image-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s4p2" class="snp-router-text-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="http://www.maximintegrated.com/sales/">Buy Overview</a></b>
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="0" cellspacing="0" width="75%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="25%">
+<nobr>
+<b class="snp-head1">Buy Direct</b><br>
+<a href="https://shop.maximintegrated.com/storefront/pricesearch.do?mode=first&amp;event=PartSearchLoad&amp;menuitem=PriceAndAvailability">Price and Availability Search</a><br>
+
+<form class="s01" name="PartSearchForm" method="post" action="https://shop.maximintegrated.com/storefront/viewpriceavailable.do?event=PartSearch&amp;menuitem=PriceAndAvailability" style="display: block;">
+<input class="small" name="Partnumber" maxlength="25" size="27" type="text">
+&nbsp;
+<input class="default_btn" name="event_PartSearch" value="Search" type="submit">
+<br>
+</form>
+
+<a href="https://shop.maximintegrated.com/storefront/shoppingcart.do?event=ShowShoppingCart&amp;menuitem=Order">Order Online</a><br>
+<a href="http://www.maximintegrated.com/samples">Free Samples</a><br>
+<a href="http://www.maximintegrated.com/sales/prototypes.cfm">Prototypes</a><br>
+<a href="http://www.maximintegrated.com/sales/direct.cfm">Order by Phone</a><br>
+<a href="http://www.maximintegrated.com/sales/direct.cfm">Order by Fax or Email</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="25%">
+<nobr>
+<b class="snp-head1">Sales and Distribution</b><br>
+<a href="http://www.maximintegrated.com/sales/offices/distributor/direct.mvp">Worldwide Sales Offices</a><br>
+<a href="http://www.maximintegrated.com/sales/offices/distributor/franchise.mvp">Worldwide Franchised Distributors</a><br>
+<a href="http://www.maximintegrated.com/sales/eol-distributor.cfm">Authorized End-of-Life Distributors</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="25%">
+<nobr>
+<b class="snp-head1">Customer Service</b><br>
+<a href="https://shop.maximintegrated.com/storefront/myorder.do?event=Myorders&amp;menuitem=MyOrder">View Order Status</a><br>
+<a href="https://shop.maximintegrated.com/storefront/update.do?event=Continue&amp;menuitem=MyAddresses">My Account</a><br>
+<a href="https://support.maximintegrated.com/en/sales/order_status_changes.mvp">Contact Us</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02">
+<nobr>
+<b class="snp-head1">Surplus Semiconductor Equipment</b><br>
+<a href="http://www.maximintegrated.com/sales/surplus-equipment/">Front-End Fab Equipment</a><br>
+<a href="http://www.maximintegrated.com/sales/surplus-equipment/back-end.cfm">Back-End Test Equipment </a><br>
+</nobr>
+</td>
+
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <!-- <b>Related:</b> -->
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/sales/other_comments.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+</div><!-- end slide text -->
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s5p1" class="snp-router-image-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s5p2" class="snp-router-text-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="https://support.maximintegrated.com/">Support Overview</a></b>
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="0" cellspacing="0" width="75%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="25%">
+<nobr>
+<b class="snp-head1">Technical Support</b><br>
+<a href="https://support.maximintegrated.com/tech_support/router.mvp">Technical Support by Email</a><br>
+<a href="https://support.maximintegrated.com/tech_support/phone.mvp">Technical Support by Phone</a><br>
+<a href="https://support.maximintegrated.com/psa/router.mvp">Part Selection Advice</a><br>
+<br>
+<b class="snp-head1">Other Requests</b><br>
+<a href="https://support.maximintegrated.com/contact_us/other_issues.mvp">Report Website Issues</a><br>
+<a href="https://support.maximintegrated.com/center.mvp">Index of Support Options</a><br>
+</nobr>
+</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" style="padding-left:30;" width="25%">
+<nobr>
+<b class="snp-head1">Sales Information</b><br>
+<a href="https://support.maximintegrated.com/sales/price_and_availability.mvp">Price and Availability</a><br>
+<a href="https://support.maximintegrated.com/sales/order_status_changes.mvp">Order Status or Changes</a><br>
+<a href="http://shop.maximintegrated.com/">Buy Online</a><br>
+<a href="http://www.maximintegrated.com/sales/offices/distributor/franchise.mvp">Worldwide Franchised Distributors</a><br>
+<a href="http://www.maximintegrated.com/samples/">Request Samples</a><br>
+<a href="http://www.maximintegrated.com/company/policy/counterfeit-parts.cfm">Ensuring Genuine Maxim Products</a><br>
+</nobr>
+</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" style="padding-left:30;" width="25%">
+<nobr>
+<b class="snp-head1">Customer Service</b><br>
+<b class="snp-head2">North America</b><br>
+888-Maxim-IC (888-629-4642)
+<div class="text10">
+<script language="javascript">
+var name = "sales-us@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-us@maximintegrated.com">sales-us@maximintegrated.com</a></div>
+
+<b class="snp-head2">Europe</b><br>
++ 353 (0) 1 223 5500<br>
+<script language="javascript">
+var name = "sales-europe@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-europe@maximintegrated.com">sales-europe@maximintegrated.com</a>
+</nobr>
+</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" style="padding-left:30;" width="25%">
+<nobr><br>
+<b class="snp-head2">Asia and Oceania</b><br>
++ 886-2-8770-5666<br>
+<script language="javascript">
+var name = "sales-asia@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-asia@maximintegrated.com">sales-asia@maximintegrated.com</a><br>
+<script language="javascript">
+var name = "sales-japan@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-japan@maximintegrated.com">sales-japan@maximintegrated.com</a><br>
+<script language="javascript">
+var name = "sales-korea@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-korea@maximintegrated.com">sales-korea@maximintegrated.com</a><br>
+<script language="javascript">
+var name = "sales-australia@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-australia@maximintegrated.com">sales-australia@maximintegrated.com</a><br>
+<script language="javascript">
+var name = "sales-newzealand@";
+var domain = "maximintegrated.com";
+document.write ("<a href=mailto:" + name + domain + ">" + name + domain + "</a>");
+</script><a href="mailto:sales-newzealand@maximintegrated.com">sales-newzealand@maximintegrated.com</a><br>
+</nobr>
+</td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <!-- <b>Related:</b> -->
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/contact_us/other_issues.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+</div><!-- end slide text -->
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s6p1" class="snp-router-image-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s6p2" class="snp-router-text-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="http://www.maximintegrated.com/company/">About Us Overview</a></b>
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="20%">
+<nobr>
+<a href="http://www.maximintegrated.com/company/values/">Our Values</a><br>
+<a href="http://www.maximintegrated.com/company/investor/">Investor Relations</a><br>
+<a href="http://www.maximintegrated.com/company/careers/">Careers</a><br>
+<a href="http://www.maximintegrated.com/company/corporate-responsibility/">Corporate Responsibility</a><br>
+<a href="http://www.maximintegrated.com/company/corporate-responsibility/suppliers/">Partnerships with Suppliers</a><br>
+<a href="http://www.maximintegrated.com/company/locations/">Worldwide Locations</a><br>
+<a href="http://www.maximintegrated.com/company/leadership/">Leadership</a><br>
+<a href="http://www.maximintegrated.com/company/newsroom/">Newsroom</a><br>
+<a href="http://www.maximintegrated.com/company/awards/">Awards</a><br>
+<a href="http://www.maximintegrated.com/company/contact/">Contact Us</a><br>
+<br>
+<b></b><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="50%">
+<nobr>
+<b class="snp-head1">Maxim at a Glance</b><br>
+At Maxim, we invent highly integrated solutions that make technology <br>seamless. We channel our collective expertise to stretch the limits of <br>technology, understand your needs, and help you get to market faster.<br>
+<br>
+
+<b class="snp-head1">Financial Strength</b><br>
+$2.4 billion (approx.) revenue in FY2013<br>
+$585 million revenue in Q1 FY2014<br>
+$3.76 billion in assets in Q1 FY2014<br>
+$1.03 billion in cash in Q1 FY2014<br>
+<br>
+
+<!--
+<b class="snp-head1">Global Resources and Support</b><br>
+24 sales offices<br>
+40 technology design centers<br>
+11 wafer fabs and test facilities<br>
+-->
+</nobr>
+</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="30%">
+<b class="snp-head1">Quick Facts</b><br>
+<table class="default" cellpadding="0" cellspacing="0">
+<tbody><tr valign="top">
+<td>
+<nobr>
+<b class="snp-head2">President and CEO</b><br>
+Tunç Doluca<br>
+<br>
+<b class="snp-head2">Headquarters</b><br>
+San Jose, CA, U.S.<br>
+<br>
+<b class="snp-head2">Founded</b><br>
+1983. We celebrate our<br>30th anniversary in 2013.<br>
+<br>
+<a href="http://www.maximintegrated.com/company/profile.cfm">Detailed Profile</a><br>
+<a href="http://www.maximintegrated.com/company/pdfs/corporate_infographic.pdf">Corporate Infographic</a> (PDF)<br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>
+<nobr>
+<b class="snp-head2">NASDAQ</b><br>
+MXIM<br>
+<br>
+<b class="snp-head2">Employees</b><br>
+9300<br>
+</nobr>
+</td>
+</tr>
+</tbody></table>
+</td>
+
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b>Related:</b> <a href="http://www.maximintegrated.com/company/careers/career-opportunities/">Career Opportunities</a>
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/contact_us/other_issues.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+</div><!-- end slide text -->
+
+
+<!-- =========================================================== -->
+
+<div id="snp-router-s7p1" class="snp-router-image-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;"></div>
+<div id="snp-router-s7p2" class="snp-router-text-panel" style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 350px;">
+
+<div class="snp-slide-header">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="middle">
+    <td class="snp" align="left" width="1%"><nobr>
+    <b><a href="https://my.maximintegrated.com/">My Maxim Home</a></b>
+    </nobr></td>
+    <td class="snp" onclick="navpad.drawer_close();" style="cursor: pointer;"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="http://www.maximintegrated.com/" onclick="navpad.drawer_close();return(false);"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/arrow-up-100.png" border="0" height="10" width="15"></a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-body">
+<table class="default" cellpadding="0" cellspacing="0" width="40%">
+<tbody><tr valign="top">
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="20%">
+<nobr>
+<!-- <b>My Stuff</b><br> -->
+<a href="https://my.maximintegrated.com/">My Home</a><br>
+<a href="https://my.maximintegrated.com/identity/index.mvp">Identity</a><br>
+<a href="https://my.maximintegrated.com/mailbox/index.mvp">MailBox</a><br>
+<a href="https://my.maximintegrated.com/subscriptions/index.mvp">Subscriptions</a><br>
+<a href="https://my.maximintegrated.com/interests/index.mvp">Interests</a><br>
+<a href="https://my.maximintegrated.com/footprints/index.mvp">Footprints</a><br>
+<!--
+<a href="https://memcenter.maximintegrated.com/home/logout_quick.mvp?return_url=http://www.maximintegrated.com/">Logout</a><br>
+-->
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+
+<!-- COLUMN =========== -->
+<td class="snp-col-s02" width="20%">
+<nobr>
+<b class="snp-head1">Shopping</b><br>
+<a href="http://www.maximintegrated.com/samples/">Free Samples</a><br>
+<a href="https://shop.maximintegrated.com/">Buy Online</a><br>
+<a href="https://shop.maximintegrated.com/storefront/myorder.do?event=Myorders&amp;menuitem=MyOrder">Order Status</a><br>
+</nobr>
+</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="snp-slide-footer">
+<table class="default" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+    <td class="snp" align="left" width="1%"><nobr>
+    <!-- <b>Related:</b> -->
+    </nobr></td>
+    <td class="snp"><br></td>
+    <td class="snp" align="right" width="1%"><nobr>
+    <a href="https://support.maximintegrated.com/member_center/other_comments.mvp">Didn't Find What You Need?</a>
+    </nobr></td>
+</tr>
+</tbody></table>
+
+</div>
+
+</div><!-- end slide text -->
+
+</div><!-- /router -->
+</div><!-- /body -->
+</div><!-- /frame -->
+</div><!-- /drawer -->
+<!-- END: SITE NAVPAD (snp) -->
+
+<!-- ======================================= -->
+
+<script type="text/javascript">
+var navpad_static = 1;
+var navpad = 0;
+if (typeof(MaxFire_Navpad_Manager) == "function") {
+    navpad = new MaxFire_Navpad_Manager();
+}
+if (navpad && navpad_static) {
+    navpad.prep_slides();
+}
+
+function open_navpad(sname)
+{
+    // If there is no navpad, just use the plain navbar.
+    if (! navpad) { return (click_navbar(sname)); }
+    if (! snp_active) { return (click_navbar(sname)); }
+
+    // Disable the navpad for certain older browsers.
+    if (Agent && Agent.is_msie6_relic()) { return (click_navbar(sname)); }
+
+    // If the navpad is already initd, just switch to the tab.
+    if (navpad.good2go) { navpad.click_tab(sname); return (false); }
+
+    // Init various navpad values.
+    navpad.sname = sname;
+    navpad.section = 'base.mvp';
+
+    // Load the navpad content.
+    navpad.load_base("prep_navpad");
+}
+function prep_navpad(wrapper)
+{
+    // If no data provided on callback, punt.
+    if (! wrapper) { return (click_navbar()); }
+    if (! wrapper.mdata) { return (click_navbar()); }
+    if (! wrapper.success) { return (click_navbar()); }
+
+    // If the target element is not there, punt.
+    var router_elem = navpad.router_elem;
+    if (! router_elem) { return (click_navbar()); }
+
+    // Put the dynamic navpad content in place.
+    router_elem.innerHTML = wrapper.mdata.base_content;
+
+    // Now that we have content, prep the navpad.
+    navpad.prep_slides();
+    navpad.click_tab(navpad.sname);
+    navpad.secmap[navpad.section] = 1;
+
+    // Make sure it worked.
+    var looks_good = 1; // TBD (bgcolor non-white)
+    if (! looks_good) { return (click_navbar()); }
+    return (true);
+}
+
+function view_section(sname, stitle, file_name)
+{
+    // If the section is already initd, take the easy way out.
+    /*-----
+    NOTE: Ajax.url contains the full blown queried url.
+    if (navpad.section[file_name]) {
+	// snp-router-s1p1
+	// snp-router-s1p2 <stuff>
+	var slide_elem = navpad.slide_elem(navpad.sname + 'p2');
+    }
+    -----*/
+
+    // Load the navpad content.
+    //if (Mary[1] != 1) { return (false); }
+    navpad.load_section("view_section_handler", file_name, { });
+    navpad.stitle = stitle;
+}
+function view_section_handler(wrapper)
+{
+    // If no data provided on callback, punt.
+    if (! wrapper) { return (click_error("no wrapper")); }
+    if (! wrapper.mdata) { return (click_error("no mdata")); }
+    if (! wrapper.success) { return (click_error("no success")); }
+
+    // Get the current slide element panel.
+    var eid = "snp-" + navpad.stitle + "-body";
+    var elem = dyna.elem(eid);
+    if (! elem) { return (click_error("no body elem: " + eid)); }
+
+    // Put the dynamic navpad content in place.
+    elem.innerHTML = wrapper.mdata.slide_content;
+
+    // Answer back.
+    return (true);
+}
+
+function click_navbar(sname)
+{
+    if (! sname) { sname = navpad.sname; }
+    var eid = 'snb-' + sname + '-link';
+    var link = document.getElementById(eid);
+    if (! link) { alert("ERROR: link not found: " + eid); return (false); }
+    if (! link.href) { alert("ERROR: bad link: " + eid); return (false); }
+    window.location = link.href;
+    return (false);
+}
+function click_error(msg)
+{
+    alert("ERROR: " + msg);
+    return (false);
+}
+</script>
+
+<!-- ================================================================== -->
+<!-- END: SITE HEADER -->
+<!-- ================================================================== -->
+
+
+
+
+
+<style>
+#viewing-area-cell { padding-left: 0px; }
+#viewing-area      { padding-left: 0px; }
+</style>
+
+<div id="core-shell" align="center">
+<div id="core-edge1"></div>
+<!-- 10px gutter -->
+<!-- <table id="core-table1" border="0" cellpadding="0" cellspacing="0" width="980"> -->
+<!-- 25px gutter -->
+<table id="core-table1" cellpadding="0" cellspacing="0" border="0" width="1010">
+<tbody><tr valign="top">
+<td id="core-content-cell"><!-- gutter padding placed here in css -->
+
+
+<!-- ================================= -->
+<div id="core-content">
+
+<div id="alpha-nav">
+
+<!-- BREAD CRUMBS -->
+<span class="breadcrumbs"><nobr><a class="crumb" href="http://www.maximintegrated.com/">Maxim</a> &gt; <a class="crumb" href="http://www.maximintegrated.com/design/">Design Support</a> &gt; <a class="crumb" href="http://www.maximintegrated.com/design/techdocs/">Technical Documents</a> &gt; <a class="crumb" href="http://www.maximintegrated.com/design/techdocs/tutorials/index.mvp">Tutorials</a> &gt; <a class="crumb" href="http://www.maximintegrated.com/design/techdocs/tutorials/index.mvp/id/2/c/A-D%20and%20D-A%20Conversion-Sampling%20Circuits#c2">A/D and D/A Conversion/Sampling Circuits</a> &gt; APP 1080</nobr></span><br>
+</div>
+
+<table id="core-table2" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody><tr valign="top">
+<td id="viewing-area-cell">
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: VIEWING AREA -->
+<!-- ======================================================================= -->
+
+
+<div id="viewing-area">
+
+
+
+<script type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/max_tooltip.js"></script>
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: CONTENT -->
+<!-- ======================================================================= -->
+
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tbody><tr><td width="800">
+
+	
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: INFO HEADER -->
+<!-- ======================================================================= -->
+
+
+
+
+
+</td></tr><tr bgcolor="#f0f0f0" valign="top">
+<td class="breadcrumbs">
+Keywords: <span style="color:#666666;">sar,successive approximation,adc,analog to digital,converter,precision</span>
+	<br><a href="#rp">Related Parts</a>
+</td>
+</tr>
+</tbody></table>
+
+
+<!-- ======================================================================= -->
+<!-- END: INFO HEADER -->
+<!-- ======================================================================= -->
+
+
+
+
+	</div></td>
+	<td>&nbsp;</td>
+	</tr><tr><td style="padding-right: 20px;" width="800">
+
+
+<img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/clear.gif" height="10" width="1"><br clear="all">
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: KINDLE_CONTENT -->
+<!-- ======================================================================= -->
+
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: TYPE,TITLE,AUTHOR -->
+<!-- ======================================================================= -->
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody><tr>
+<td>
+	<table cellpadding="0" cellspacing="0" border="0">
+	<tbody><tr>
+	<td class="grayb5" nowrap="nowrap">
+	TUTORIAL 1080
+	</td>
+	<td class="grayb5" nowrap="nowrap">
+
+
+
+
+
+
+
+
+
+
+	</td>
+	</tr>
+	</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td>
+<h1>Understanding SAR ADCs: Their Architecture and Comparison with Other ADCs</h1>
+	
+	<table cellpadding="0" cellspacing="0" border="0">
+	<tbody><tr><td class="grayb5">Oct 02, 2001</td></tr>
+	</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<br>
+
+<!-- ======================================================================= -->
+<!-- END: TYPE,TITLE,AUTHOR -->
+<!-- ======================================================================= -->
+
+
+
+
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: WIRELESS NAV -->
+<!-- ======================================================================= -->
+
+
+
+<!-- ======================================================================= -->
+<!-- END: WIRELESS NAV -->
+<!-- ======================================================================= -->
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- ABSTRACT -->
+<!-- ======================================================================= -->
+
+	<i>Abstract:&nbsp;Successive-approximation-register (SAR) 
+analog-to-digital converters (ADCs) represent the majority of the ADC 
+market for medium- to high-resolution ADCs. SAR ADCs provide up to 5Msps
+ sampling rates with resolutions from 8 to 18 bits. The SAR architecture
+ allows for high-performance, low-power ADCs to be packaged in small 
+form factors for today's demanding applications.<br><br>
+
+This paper will explain how the SAR ADC operates by using a binary 
+search algorithm to converge on the input signal. It also explains the 
+heart of the SAR ADC, the capacitive DAC, and the high-speed comparator.
+ Finally, the article will contrast the SAR architecture with pipeline, 
+flash, and sigma-delta ADCs. </i>
+	<br><br clear="all">
+
+
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- CONTENT: DB HTML -->
+<!-- ======================================================================= -->
+
+	<h2>Introduction</h2>
+Successive-approximation-register (SAR) analog-to-digital converters 
+(ADCs) are frequently the architecture of choice for 
+medium-to-high-resolution applications with sample rates under 5 
+megasamples per second (<a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Msps/gpk/622" onmouseover="MaximGlossaryTip(622);" onmouseout="MaximGlossaryUnTip();">Msps</a>). Resolution for SAR ADCs most commonly ranges from 8 to 16 bits, and they provide low power consumption as well as a <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/SFF-8472/gpk/270" onmouseover="MaximGlossaryTip(270);" onmouseout="MaximGlossaryUnTip();">small form factor</a>.
+ This combination of features makes these ADCs ideal for a wide variety 
+of applications, such as portable/battery-powered instruments, pen 
+digitizers, industrial controls, and data/signal acquisition.<br><br>
+
+As the name implies, the SAR ADC basically implements a binary search 
+algorithm. Therefore, while the internal circuitry may be running at 
+several <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/MHz/gpk/607" onmouseover="MaximGlossaryTip(607);" onmouseout="MaximGlossaryUnTip();">megahertz</a> (MHz), the ADC <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Sampling-Rate/gpk/952" onmouseover="MaximGlossaryTip(952);" onmouseout="MaximGlossaryUnTip();">sample rate</a> is a fraction of that number due to the successive-approximation algorithm.<br><br>
+
+<h2>SAR ADC Architecture</h2>
+Although there are many variations for implementing a SAR ADC, the basic architecture is quite simple (see <b>Figure 1</b>). The <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Analog/gpk/861" onmouseover="MaximGlossaryTip(861);" onmouseout="MaximGlossaryUnTip();">analog</a> input <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Volt/gpk/801" onmouseover="MaximGlossaryTip(801);" onmouseout="MaximGlossaryUnTip();">voltage</a> (V<sub>IN</sub>)
+ is held on a track/hold. To implement the binary search algorithm, the 
+N-bit register is first set to midscale (that is, 100... .00, where the <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/MSB/gpk/1011" onmouseover="MaximGlossaryTip(1011);" onmouseout="MaximGlossaryUnTip();">MSB</a> is set to 1). This forces the DAC output (V<sub>DAC</sub>) to be V<sub>REF</sub>/2, where V<sub>REF</sub> is the reference voltage provided to the ADC. A comparison is then performed to determine if V<sub>IN</sub> is less than, or greater than, V<sub>DAC</sub>. If V<sub>IN</sub> is greater than V<sub>DAC</sub>, the <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Comparator/gpk/989" onmouseover="MaximGlossaryTip(989);" onmouseout="MaximGlossaryUnTip();">comparator</a> output is a logic high, or 1, and the MSB of the N-bit register remains at 1. Conversely, if V<sub>IN</sub> is less than V<sub>DAC</sub>,
+ the comparator output is a logic low and the MSB of the register is 
+cleared to logic 0. The SAR control logic then moves to the next bit 
+down, forces that bit high, and does another comparison. The sequence 
+continues all the way down to the <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/LSB/gpk/590" onmouseover="MaximGlossaryTip(590);" onmouseout="MaximGlossaryUnTip();">LSB</a>. Once this is done, the conversion is complete and the N-bit digital word is available in the register.<br><br>
+
+<img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/1080Fig01.gif" alt="Figure 1. Simplified N-bit SAR ADC architecture."><br><i>Figure 1. Simplified N-bit SAR ADC architecture.</i><br><br>
+
+<b>Figure 2</b> shows an example of a 4-bit conversion. The y-axis (and 
+the bold line in the figure) represents the DAC output voltage. In the 
+example, the first comparison shows that V<sub>IN</sub> &lt; V<sub>DAC</sub>. Thus, bit 3 is set to 0. The DAC is then set to 0100<sub>2</sub> and the second comparison is performed. As V<sub>IN</sub> &gt; V<sub>DAC</sub>, bit 2 remains at 1. The DAC is then set to 0110<sub>2</sub>, and the third comparison is performed. Bit 1 is set to 0, and the DAC is then set to 0101<sub>2</sub> for the final comparison. Finally, bit 0 remains at 1 because V<sub>IN</sub> &gt; V<sub>DAC</sub>.<br><br>
+
+<img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/1080Fig02.gif" alt="Figure 2. SAR operation (4-bit ADC example)."><br><i>Figure 2. SAR operation (4-bit ADC example).</i><br><br>
+
+Notice that four comparison periods are required for a 4-bit ADC. 
+Generally speaking, an N-bit SAR ADC will require N comparison periods 
+and will not be ready for the next conversion until the current one is 
+complete. This explains why these ADCs are power- and space-efficient, 
+yet are rarely seen in speed-and-resolution combinations beyond a few 
+mega-samples per second (Msps) at 14 to 16 bits. Some of the smallest 
+ADCs available on the market are based on the SAR architecture. The <a href="http://www.maximintegrated.com/MAX1115">MAX1115/MAX1116</a> and <a href="http://www.maximintegrated.com/MAX1117">MAX1117/MAX1118</a> 8-bit ADCs and their higher resolution counterparts, the <a href="http://www.maximintegrated.com/MAX1086">MAX1086</a> and the <a href="http://www.maximintegrated.com/MAX1286">MAX1286</a> (10 and 12 bits, respectively), fit in tiny SOT23 packages measuring 3mm x 3mm. The 12-bit <a href="http://www.maximintegrated.com/MAX11102">MAX11102</a> comes in a 3mm x 3mm TDFN package or a 3mm x 5mm µMAX® package.<br><br>
+
+There is another notable feature of SAR ADCs: power dissipation scales 
+with the sample rate. This contrasts with flash or pipelined ADCs which 
+usually have constant power dissipation versus sample rate. This scaled 
+power dissipation is especially useful in low-power applications or 
+applications where the data acquisition is not continuous (for example, <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/PDA/gpk/659" onmouseover="MaximGlossaryTip(659);" onmouseout="MaximGlossaryUnTip();">PDA</a> digitizers).<br><br>
+
+<h2>In-Depth SAR Analysis</h2>
+The two critical components of a SAR ADC are the comparator and the DAC.
+ As we shall see later, the track/hold shown in Figure 1 can be embedded
+ in the DAC and, therefore, may not be an explicit circuit.<br><br>
+
+A SAR ADC's speed is limited by:
+<ul>
+<li> The settling time of the DAC, which must settle to within the resolution of the overall converter, for example, ½ LSB
+</li><li> The comparator, which must resolve small differences in V<sub>IN</sub> and V<sub>DAC</sub> within the specified time
+</li><li> The logic overhead
+</li></ul>
+
+<h3>The DAC</h3>
+The maximum settling time of the DAC is usually determined by its MSB 
+settling. This is simply because the MSB transition represents the 
+largest excursion of the DAC output. In addition, the linearity of the 
+overall ADC is limited by the linearity of the DAC. Therefore, because 
+of the inherent component-matching limitaions, SAR ADCs with more than 
+12 bits of resolution will often require some form of trimming or 
+calibration to achieve the necessary linearity. Although it is somewhat 
+process-and-design-dependent, component matching limits the linearity to
+ about 12 bits in practical DAC designs.<br><br>
+
+Many SAR ADCs use a capacitive DAC that provides an inherent track/hold 
+function. Capacitive DACs employ the principle of charge redistribution 
+to generate an analog output voltage. Because these types of DACs are 
+prevalent in SAR ADCs, it is beneficial to discuss their operation.<br><br>
+
+A capacitive DAC consists of an array of N capacitors with binary weighted values plus one "dummy LSB" <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Capacitor/gpk/1168" onmouseover="MaximGlossaryTip(1168);" onmouseout="MaximGlossaryUnTip();">capacitor</a>. <b>Figure 3</b>
+ shows an example of a 16-bit capacitive DAC connected to a comparator. 
+During the acquisition phase, the array's common terminal (the terminal 
+at which all the capacitors share a connection, see Figure 3) is 
+connected to ground and all free terminals are connected to the input 
+signal (analog in or V<sub>IN</sub>). After acquisition, the common terminal is disconnected from ground and the free terminals are disconnected from V<sub>IN</sub>,
+ thus effectively trapping a charge proportional to the input voltage on
+ the capacitor array. The free terminals of all the capacitors are then 
+connected to ground, driving the common terminal negative to a voltage 
+equal to -V<sub>IN</sub>.<br><br>
+
+<img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/1080Fig03.gif" alt="Figure 3. A 16-bit example of a capacitive DAC."> <br>
+<i>Figure 3. A 16-bit example of a capacitive DAC.</i><br><br>
+
+As the first step in the binary search algorithm, the bottom plate of 
+the MSB capacitor is disconnected from ground and connected to V<sub>REF</sub>. This drives the common terminal in the positive direction by an amount equal to ½V<sub>REF</sub>.<br><br>
+
+Therefore, V<sub>COMMON</sub> = -V<sub>IN</sub> + ½ × V<sub>REF</sub><br><br>
+
+The comparator output yields a logic 1 if V<sub>COMMON</sub> &lt; 0 (i.e., V<sub>IN</sub> &gt; ½ × V<sub>REF</sub>).
+
+The comparator output yields logic 0 if V<sub>IN</sub> &lt; ½ × V<sub>REF</sub>.<br><br>
+
+If the comparator output is logic 1, then the bottom plate of the MSB capacitor stays connected to V<sub>REF</sub>. Otherwise, the bottom plate of the MSB capacitor is connected back to ground.<br><br>
+
+The bottom plate of the next smaller capacitor is then connected to V<sub>REF</sub> and the new V<sub>COMMON</sub> voltage is compared with ground.<br><br> 
+
+This continues until all the bits have been determined.<br><br>
+
+In general, V<sub>COMMON</sub> = -V<sub>IN</sub> + B<sub>N-1</sub> × V<sub>REF</sub>/2 + B<sub>N-2</sub> × V<sub>REF</sub>/4 + B<sub>N-1</sub> × V<sub>REF</sub>/8 + ... + B0 × V<sub>REF</sub>/2<sup>N-1</sup> (B_ comparator output/ADC output bits).<br><br>
+
+<h3>DAC Calibration</h3>
+In an ideal DAC, each of the capacitors associated with the data bits 
+would be exactly twice the value of the next-smaller capacitor. In 
+high-resolution ADCs (for example, 16 bits), this results in a range of 
+values too wide to be realized in an economically feasible size. The 
+16-bit SAR ADCs like the <a href="http://www.maximintegrated.com/MAX195">MAX195</a>
+ use a capacitor array that actually consists of two arrays capacitively
+ coupled to reduce the LSB array's effective value. The capacitors in 
+the MSB array are production trimmed to reduce errors. Small variations 
+in the LSB capacitors contribute insignificant errors to the 16-bit 
+result. Unfortunately, trimming alone does not yield 16-bit performance 
+or compensate for changes in performance due to changes in <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Temperature/gpk/844" onmouseover="MaximGlossaryTip(844);" onmouseout="MaximGlossaryUnTip();">temperature</a>,
+ supply voltage, and other parameters. For this reason, the MAX195 
+includes a calibration DAC for each capacitor in the MSB array. These 
+DACs are capacitively coupled to the main DAC output and offset the main
+ DAC's output according to the value on their digital inputs. <br><br>
+
+During calibration, the correct digital code to compensate for the error
+ in each MSB capacitor is determined and stored. Thereafter, the stored 
+code is provided to the appropriate calibration DAC whenever the 
+corresponding bit in the main DAC is high. This compensates for errors 
+in the associated capacitor. Calibration is usually initiated by the 
+user or done automatically on power-up. To reduce the effects of noise, 
+each calibration experiment is performed many times (about 14,000 clock <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Hz/gpk/536" onmouseover="MaximGlossaryTip(536);" onmouseout="MaximGlossaryUnTip();">cycles</a>
+ in the MAX195), and the results are averaged. Calibration is best 
+performed when the power-supply voltages are stable. High-resolution 
+ADCs should be recalibrated any time that there is a significant change 
+in supply voltages, temperature, reference voltage, or clock 
+characteristics, because these parameters affect the DC offset. If 
+linearity is the only concern, much larger changes in these parameters 
+can be tolerated. Because the calibration data is stored digitally, 
+there is no need to perform frequent conversions to maintain accuracy.<br><br>
+
+<h3>The Comparator</h3>
+The requirements of the comparator are speed and accuracy. Comparator 
+offset does not affect overall linearity as it appears as an offset in 
+the overall <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Transfer/gpk/1098" onmouseover="MaximGlossaryTip(1098);" onmouseout="MaximGlossaryUnTip();">transfer</a>
+ characteristic. In addition, offset-cancellation techniques are usually
+ applied to reduce the comparator offset. Noise, however, is a concern, 
+and the comparator is usually designed to have input-referred noise less
+ than 1 LSB. Additionally, the comparator needs to resolve voltages 
+within the accuracy of the overall system. It needs to be as accurate as
+ the overall system.<br><br>
+
+<h2>SAR ADCs Compared with Other ADC Architectures</h2>
+
+<h3>Versus Pipelined ADCs</h3>
+A pipelined ADC employs a <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Parallel-Interface/gpk/995" onmouseover="MaximGlossaryTip(995);" onmouseout="MaximGlossaryUnTip();">parallel</a>
+ structure in which each stage works on 1 to a few bits (of successive 
+samples) concurrently. This inherent parallelism increases throughput, 
+but at a trade-off of power consumption and latency. Latency in this 
+case is defined as the difference between the time when an analog sample
+ is acquired by the ADC and the time when the digital data is available 
+at the output. For example, a five-stage pipelined ADC will have at 
+least five clock cycles of latency, whereas a SAR has only one clock 
+cycle of latency. Note that the latency definition applies only to the 
+throughput of the ADC, not the internal clock of a SAR which runs at 
+many times the frequency of the throughput. Pipelined ADCs frequently 
+have digital error-correction logic to reduce the accuracy requirement 
+of the <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Flash-ADCs/gpk/129" onmouseover="MaximGlossaryTip(129);" onmouseout="MaximGlossaryUnTip();">flash ADCs</a>
+ (i.e., comparators) in each pipeline stage. However, a SAR ADC requires
+ the comparator to be as accurate as the overall system. A pipelined ADC
+ generally requires significantly more silicon area than an equivalent 
+SAR. Like a SAR, a pipelined ADC with more than 12 bits of accuracy 
+usually requires some form of trimming or calibration.<br><br>
+
+<h3>Versus Flash ADCs</h3>
+A flash ADC is comprised of a large bank of comparators, each consisting of <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Wideband/gpk/335" onmouseover="MaximGlossaryTip(335);" onmouseout="MaximGlossaryUnTip();">wideband</a>, low-gain preamp(s) followed by a latch. The preamps must only provide gain but do not need to be <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Linear/gpk/862" onmouseover="MaximGlossaryTip(862);" onmouseout="MaximGlossaryUnTip();">linear</a>
+ or accurate. This means that only the comparators' trip points have to 
+be accurate. As a result, a flash ADC is the fastest architecture 
+available.<br><br>
+
+The primary trade-off between a flash ADC's speed is the SAR ADC's 
+significantly lower power consumption and smaller form factor. While 
+extremely fast 8-bit flash ADCs (or their folding/interpolation 
+variants) exist with sampling rates as high as 1.5Gsps (e.g., the <a href="http://www.maximintegrated.com/MAX104">MAX104</a>, <a href="http://www.maximintegrated.com/MAX106">MAX106</a>, and <a href="http://www.maximintegrated.com/MAX108">MAX108</a>),
+ it is much harder to find a 10-bit flash ADC. Moreover, 12-bit (and 
+above) flash ADCs are not commercially viable products. This is simply 
+because the number of comparators in a flash ADC increases by a factor 
+of two for every extra bit of resolution. Meanwhile, each comparator 
+must be twice as accurate. In a SAR ADC, however, the increased 
+resolution requires more accurate components, yet the complexity does 
+not increase exponentially. Of course, SAR ADCs are not capable of the 
+speeds of flash ADCs.<br><br>
+
+<h3>Versus <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Delta-Sigma/gpk/276" onmouseover="MaximGlossaryTip(276);" onmouseout="MaximGlossaryUnTip();">Sigma-Delta</a> Converters</h3>
+Traditional oversampling/sigma-delta converters used in digital audio 
+applications have limited bandwidths of about 22kHz. Recently, some 
+high-bandwidth sigma-delta converters reached bandwidths of 1MHz to 2MHz
+ with 12 to 16 bits of resolution. These are usually very-high-order 
+sigma-delta modulators (for example, 4th-order or higher), incorporating
+ a multibit ADC and multibit feedback DAC. Sigma-delta converters have 
+the innate advantage over SAR ADCs: they require no special trimming or 
+calibration, even to attain 16 to 18 bits of resolution. Because their <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Sampling-Rate/gpk/952" onmouseover="MaximGlossaryTip(952);" onmouseout="MaximGlossaryUnTip();">sampling rate</a> is much higher than the effective <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Bandwidth/gpk/386" onmouseover="MaximGlossaryTip(386);" onmouseout="MaximGlossaryUnTip();">bandwidth</a>, they also do not require <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/Anti-Aliasing/gpk/358" onmouseover="MaximGlossaryTip(358);" onmouseout="MaximGlossaryUnTip();">anti-alias</a>
+ filters with steep rolloffs at the analog inputs. The backend digital 
+filters take care of this. The oversampling nature of the sigma-delta 
+converter can also tend to "average out" any system noise at the analog 
+inputs.<br><br>
+
+Sigma-delta converters trade speed for resolution. The need to sample 
+many times (at least 16 times and often more) to produce one final 
+sample dictates that the internal analog components in the sigma-delta 
+modulator operate much faster than the final data rate. The digital 
+decimation filter is also a challenge to design and consumes 
+considerable silicon area. The fastest high-resolution sigma-delta 
+converters are not expected to have significantly higher bandwidth than a
+ few MHz in the near future.<br><br>
+
+<h2>Conclusion</h2>
+In summary, the primary advantages of SAR ADCs are low power 
+consumption, high resolution and accuracy, and a small form factor. 
+Because of these benefits, SAR ADCs can often be integrated with other 
+larger functions. The main limitations of the SAR architecture are the 
+lower sampling rates and the requirements that the building blocks, the 
+DAC and the comparator, be as accurate as the overall system.<br><br><br><br>
+
+<b>References</b>
+<ol>
+<li> Razavi, Behzad; <i>Principles of Data Conversion System Design;</i> <a class="muted2" href="http://www.maximintegrated.com/glossary/definitions.mvp/term/IEEE/gpk/167" onmouseover="MaximGlossaryTip(167);" onmouseout="MaximGlossaryUnTip();">IEEE</a> Press, 1995.<br>
+</li><li> Van De Plassche, Rudy; <i>Integrated Analog-to-Digital and Digital-to-Analog
+Converters;</i> Kluwer Academic Publishers, 1994.<br>
+</li><li> Maxim Integrated; <a href="http://www.maximintegrated.com/app-notes/index.mvp/id/1023">Understanding
+Pipelined ADCs</a>.
+</li><li>Baker, R. Jacob, Li, Harry W., Boyce, David E., <i>CMOS Circuit Design, Layout, and Simulation</i>, 1st Edition (IEEE Press Series on Microelectronic Systems).
+</li></ol>
+	<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: TRADEMARKS -->
+<!-- ======================================================================= -->
+
+µMAX is a registered trademark of Maxim Integrated Products, Inc.<br><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/clear.gif" height="2"><br>		<br><br>
+<!-- ======================================================================= -->
+<!-- END: TRADEMARKS -->
+<!-- ======================================================================= -->
+
+
+
+
+
+
+
+
+
+	<a name="rp"></a>
+<!-- ======================================================================= -->
+<!-- BEGIN: RELATED PARTS -->
+<!-- ======================================================================= -->
+
+
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tbody><tr><td class="tablehead2" colspan="3">Related Parts</td></tr>
+
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3381">MAX1065</a></td>
+		<td class="tablebody2" valign="top" width="60%">Low-Power, 14-Bit Analog-to-Digital Converters with Parallel Interface</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1065">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3381">MAX1066</a></td>
+		<td class="tablebody2" valign="top" width="60%">Low-Power, 14-Bit Analog-to-Digital Converters with Parallel Interface</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1066">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/6419">MAX11102</a></td>
+		<td class="tablebody2" valign="top" width="60%">2Msps/3Msps, Low-Power, Serial 12-/10-/8-Bit ADCs</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX11102">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/1676">MAX1111</a></td>
+		<td class="tablebody2" valign="top" width="60%">+2.7V, Low-Power, Multichannel, Serial, 8-Bit ADCs</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1111">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/2366">MAX1118</a></td>
+		<td class="tablebody2" valign="top" width="60%">Single-Supply, Low-Power, 2-Channel, Serial 8-Bit ADCs</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1118">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3068">MAX1132</a></td>
+		<td class="tablebody2" valign="top" width="60%">16-Bit ADC, 200ksps, 5V Single-Supply with Reference</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1132">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3068">MAX1133</a></td>
+		<td class="tablebody2" valign="top" width="60%">16-Bit ADC, 200ksps, 5V Single-Supply with Reference</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1133">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3481">MAX1162</a></td>
+		<td class="tablebody2" valign="top" width="60%">16-Bit, +5V, 200ksps ADC with 10µA Shutdown</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1162">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3541">MAX1165</a></td>
+		<td class="tablebody2" valign="top" width="60%">Low-Power, 16-Bit Analog-to-Digital Converters with Parallel Interface</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1165">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/3541">MAX1166</a></td>
+		<td class="tablebody2" valign="top" width="60%">Low-Power, 16-Bit Analog-to-Digital Converters with Parallel Interface</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1166">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/2235">MAX1280</a></td>
+		<td class="tablebody2" valign="top" width="60%">400ksps/300ksps, Single-Supply, Low-Power, 8-Channel, Serial 12-Bit ADCs with Internal Reference</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1280">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/2098">MAX1290</a></td>
+		<td class="tablebody2" valign="top" width="60%">400ksps, +5V, 8-/4-Channel, 12-Bit ADCs with +2.5V Reference and Parallel Interface</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX1290">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+		<tr>
+		<td class="tablebody2" valign="top"><a href="http://www.maximintegrated.com/datasheet/index.mvp/id/1040">MAX195</a></td>
+		<td class="tablebody2" valign="top" width="60%">16-Bit, 85ksps ADC with 10µA Shutdown</td>
+		<td class="tablebody2" valign="top">
+			<a href="https://shop.maximintegrated.com/storefront/searchsample.do?event=Sample&amp;menuitem=Sample&amp;Partnumber=MAX195">Free Samples</a>
+		&nbsp;
+		</td>
+		</tr>
+
+	</tbody></table>
+	<br><br>
+
+<!-- ======================================================================= -->
+<!-- END: RELATED PARTS -->
+<!-- ======================================================================= -->
+
+
+
+
+<!-- ======================================================================= -->
+<!-- END: KINDLE_CONTENT -->
+<!-- ======================================================================= -->
+
+
+<!-- ======================================================================= -->
+<!-- EE-MAIL -->
+<!-- ======================================================================= -->
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: NEXT STEP LINKS -->
+<!-- ======================================================================= -->
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody><tr><td class="tablehead2" colspan="2">Next Steps</td></tr>
+<tr>
+	<td class="tablebody2">
+		EE-Mail
+	</td>
+	<td class="tablebody2">
+		<a href="https://my.maximintegrated.com/en/subscriptions/ee_mail/index.mvp">Subscribe to EE-Mail</a> and receive automatic notice of new documents in your areas of interest.
+	</td>
+</tr>
+	<tr>
+		<td class="tablebody2">
+			Download
+		</td>
+	
+		<td class="tablebody2">
+			<a href="http://pdfserv.maximintegrated.com/en/an/AN1080.pdf">Download, PDF Format</a>&nbsp;(54kB)
+		&nbsp;</td>
+	</tr>
+<tr>
+	<td class="tablebody2">
+		Share
+	</td>
+
+	<td class="tablebody2">
+		<div class="addthis_toolbox addthis_default_style">
+		<a class="addthis_button_google_plusone at300b" g:plusone:size="medium" g:plusone:count="false"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/fastbutton.htm" name="I0_1400736108430" id="I0_1400736108430" vspace="0" tabindex="0" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></a>
+		<a class="addthis_button_tweet at300b" tw:count="none"><iframe style="width: 57px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-none" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/tweet_button.htm" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe></a>
+		<a class="addthis_button_facebook_like at300b"><div fb-iframe-plugin-query="action=like&amp;app_id=172525162793917&amp;font=arial&amp;href=http%3A%2F%2Fwww.maximintegrated.com%2Fapp-notes%2Findex.mvp%2Fid%2F1080&amp;layout=button_count&amp;locale=en_US&amp;ref=.U32Ja70Us70.like&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=90" fb-xfbml-state="rendered" data-send="false" data-href="http://www.maximintegrated.com/app-notes/index.mvp/id/1080" data-font="arial" data-width="90" data-action="like" data-show_faces="false" data-layout="button_count" class="fb-like fb_iframe_widget" data-ref=".U32Ja70Us70.like"><span style="vertical-align: bottom; width: 77px; height: 20px;"><iframe class="" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/like.htm" style="border: medium none; visibility: visible; width: 77px; height: 20px;" title="fb:like Facebook Social Plugin" scrolling="no" allowtransparency="true" name="f3b602379684226" frameborder="0" height="1000px" width="90px"></iframe></span></div></a>
+		<a href="#" class="addthis_button_compact at300m"><span class="at16nc at300bs at15nc at15t_compact at16t_compact"><span class="at_a11y">More Sharing Services</span></span>Other Channels</a>
+		<a href="#" title="Email" target="_blank" class="addthis_button_email at300b"><span class="at16nc at300bs at15nc at15t_email at16t_email"><span class="at_a11y">Share on email</span></span>&nbsp;Email</a> this page to an associate or friend.&nbsp;
+		<div class="atclear"></div></div>
+	</td>
+</tr>
+</tbody></table>
+<br>
+
+<!-- ======================================================================= -->
+<!-- END: NEXT STEP LINKS -->
+<!-- ======================================================================= -->
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- PDF_LINK -->
+<!-- ======================================================================= -->
+
+	<br><br>
+	<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tbody><tr><td colspan="3" align="left">
+
+APP 1080:	Oct 02, 2001
+	<br>
+
+	
+
+
+
+<font color="#666666">
+TUTORIAL 1080,
+AN1080,
+AN 1080,
+APP1080,
+Appnote1080,
+Appnote 1080</font>
+
+
+
+	</td></tr>
+	</tbody></table>
+
+	</td><td valign="top">
+	
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: RIGHT NAV -->
+<!-- ======================================================================= -->
+
+
+<table cellpadding="0" cellspacing="0" border="0"><tbody><tr>
+<td style="border-left: 1px dotted #A6A8AB; padding: 0px 0px 0px 16px;">
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: SOCIAL MEDIA -->
+<!-- ======================================================================= -->
+
+
+<script gapi_processed="true" type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/plusone.js"></script>
+
+<h3>Share</h3>
+
+<table cellpadding="0" cellspacing="0" border="0">
+<tbody><tr align="left">
+<td nowrap="nowrap">
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+  <p><a class="addthis_button_facebook_like at300b"><div fb-iframe-plugin-query="action=like&amp;app_id=172525162793917&amp;font=arial&amp;href=http%3A%2F%2Fwww.maximintegrated.com%2Fapp-notes%2Findex.mvp%2Fid%2F1080&amp;layout=button_count&amp;locale=en_US&amp;ref=.U32Ja6KwpfI.like&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=90" fb-xfbml-state="rendered" data-send="false" data-href="http://www.maximintegrated.com/app-notes/index.mvp/id/1080" data-font="arial" data-width="90" data-action="like" data-show_faces="false" data-layout="button_count" class="fb-like fb_iframe_widget" data-ref=".U32Ja6KwpfI.like"><span style="vertical-align: bottom; width: 77px; height: 20px;"><iframe class="" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/like_002.htm" style="border: medium none; visibility: visible; width: 77px; height: 20px;" title="fb:like Facebook Social Plugin" scrolling="no" allowtransparency="true" name="f378cd14821e136" frameborder="0" height="1000px" width="90px"></iframe></span></div></a><br>
+  </p><p><a class="addthis_button_tweet at300b" tw:count="none"><iframe style="width: 57px; height: 20px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-none" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/tweet_button_002.htm" allowtransparency="true" scrolling="no" id="twitter-widget-1" frameborder="0"></iframe></a><br>
+  </p><p><a class="addthis_button_pinterest_pinit at300b"><span class="at_PinItButton"></span></a><br>
+  </p><p><a class="addthis_button_google_plusone at300b" g:plusone:size="medium" g:plusone:count="false"><div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/fastbutton_002.htm" name="I1_1400736108458" id="I1_1400736108458" vspace="0" tabindex="0" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></a><br>
+  </p><p><a href="#" title="Email" target="_blank" class="addthis_button_email at300b"><span class="at16nc at300bs at15nc at15t_email at16t_email"><span class="at_a11y">Share on email</span></span>&nbsp;Email</a><br>
+  </p><p><a href="#" class="addthis_button_compact at300m"><span class="at16nc at300bs at15nc at15t_compact at16t_compact"><span class="at_a11y">More Sharing Services</span></span>Other Channels</a>
+</p><div class="atclear"></div></div>
+<script type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/addthis_widget.js"></script><div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;"><iframe src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/sh158.htm" style="height: 1px; width: 1px; position: absolute; z-index: 100000; border: 0px none; left: 0px; top: 0px;" title="AddThis utility frame" id="_atssh470"></iframe></div><script src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/core131.js" type="text/javascript"></script>
+<!-- AddThis Button END -->
+
+</td>
+</tr>
+</tbody></table>
+
+<!-- ======================================================================= -->
+<!-- END: SOCIAL MEDIA -->
+<!-- ======================================================================= -->
+
+
+
+<br><br>
+
+
+
+
+
+<!-- ======================================================================= -->
+<!-- BEGIN: MORE LINKS -->
+<!-- ======================================================================= -->
+
+
+
+<table cellpadding="0" cellspacing="0" border="0">
+<tbody><tr align="left">
+<td nowrap="nowrap">
+
+<h3>More</h3>
+<br>
+
+	<div class="text8">
+	<a href="http://pdfserv.maximintegrated.com/en/an/AN1080.pdf">Download, PDF Format</a>&nbsp;(54kB)
+	</div>
+
+
+
+
+
+
+	<div class="text8">
+	<a href="#rp">Related Parts/Samples</a>
+	</div>
+
+
+<div class="text8">
+<a href="https://my.maximintegrated.com/en/subscriptions/ee_mail/index.mvp">Sign-Up for EE-Mail™</a>
+</div>
+
+
+
+
+<div class="text8">
+<a href="javascript:window.print()">Print</a>
+</div>
+
+</td></tr>
+</tbody></table>
+
+<!-- ======================================================================= -->
+<!-- END: MORE LINKS -->
+<!-- ======================================================================= -->
+
+
+
+
+</td></tr>
+</tbody></table>
+
+<!-- ======================================================================= -->
+<!-- END: RIGHT NAV -->
+<!-- ======================================================================= -->
+
+
+
+	</td></tr></tbody></table>
+<!-- ======================================================================= -->
+<!-- END: CONTENT -->
+<!-- ======================================================================= -->
+
+
+
+
+
+
+
+
+
+</div><!-- /viewing-area -->
+
+
+
+</td>
+</tr>
+</tbody></table><!-- /core-table2 -->
+
+<div id="omega-nav"><br></div>
+
+</div><!-- /core-content -->
+<!-- ================================= -->
+
+
+<!-- /core-content-cell -->
+
+<!-- /core-table1 -->
+<div id="core-edge2"></div>
+<!-- /core-shell -->
+
+
+
+
+
+    <!-- FILE CACHE [3518] (SITE FOOTER): MISS -->
+<!-- ================================================================== -->
+<!-- BEGIN: SITE FOOTER -->
+<!-- ================================================================== -->
+
+<div id="site-footer" align="center">
+<div id="site-footer-edge1"></div>
+
+<!-- BEGIN: FOOTER CONTROL PANEL -->
+<div id="fcp-shell">
+<table id="fcp-table1" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody><tr valign="middle">
+    <td id="fcp-box1" align="left" width="97%">
+    <div class="fcp-text"><nobr>© 2014 Maxim Integrated</nobr></div>
+    </td>
+
+    <td id="fcp-box2" align="right" width="1%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+    <td id="fcp-box3" align="right" width="1%">
+    <div class="fcp-text"><nobr>
+    <a class="fcp" href="http://www.maximintegrated.com/contact/">Contact Us</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a class="fcp" href="http://www.maximintegrated.com/company/careers/career-opportunities/">Career Opportunities</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a class="fcp" href="http://www.maximintegrated.com/legal/privacy.cfm">Privacy Policy</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a class="fcp" href="http://www.maximintegrated.com/legal/">Legal Notices</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a class="fcp" href="https://vip.maximintegrated.com/distributor">Distributor Portal</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    Follow Us
+    </nobr></div>
+    </td>
+
+    <td id="fcp-box4" align="right" width="1%">
+    <nobr>
+    &nbsp;
+    <a class="fcp" href="http://www.maximintegrated.com/rss/feed.mvp"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/rss.jpg" border="0" height="19" width="19"></a>
+    <a class="fcp" href="http://www.facebook.com/Maxim.IC"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/facebook.jpg" border="0" height="19" width="19"></a>
+    <a class="fcp" href="http://twitter.com/maxim_ic"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/twitter.jpg" border="0" height="19" width="19"></a>
+    <a class="fcp" href="https://plus.google.com/114771594249322760325?prsrc=3"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/google.jpg" border="0" height="19" width="19"></a>
+    <a class="fcp" href="http://pinterest.com/maximintegrated/"><img src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/pinterest.jpg" border="0" height="19" width="19"></a>
+    </nobr>
+    </td>
+</tr>
+</tbody></table>
+</div><!-- /fcp-shell -->
+<!-- END: FOOTER CONTROL PANEL -->
+
+<div id="site-footer-edge2"></div>
+</div><!-- /site-footer -->
+
+<!-- ================================================================== -->
+<!-- END: SITE FOOTER -->
+<!-- ================================================================== -->
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/ga_footer.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class=" fb_reset" id="fb-root"><script async="" src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/all.js"></script><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/ping.htm" style="display: none;" scrolling="no" allowtransparency="true" name="f26774d413e29e4" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/dgdTycPTSRj.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="Understanding%20SAR%20ADCs%20%20Their%20Architecture%20and%20Comparison%20with%20Other%20ADCs%20-%20Tutorial%20-%20Maxim_files/dgdTycPTSRj_002.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div></div></body></html>
